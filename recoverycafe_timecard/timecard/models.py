@@ -14,7 +14,7 @@ class Volunteer(models.Model):
     staff_id = models.IntegerField(unique=True)
 
 class PunchTime(models.Model):
-    volunteeer_id = models.ForeignKey(
+    volunteer_id = models.ForeignKey(
             Volunteer,
             on_delete=models.CASCADE
     )
