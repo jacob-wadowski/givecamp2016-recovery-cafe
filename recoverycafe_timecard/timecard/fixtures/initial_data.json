@@ -79,7 +79,9 @@
       "task_id": 1,
       "branch_id": 1,
       "punch_type": "IN",
-      "punch_time": "2016-01-02 08:00:00"
+      "punch_time": "2016-01-02 08:00:00",
+      "last_modified": "2016-01-01 00:00:01",
+      "flags": 0
     }
   },
   {
@@ -90,7 +92,9 @@
       "task_id": 1,
       "branch_id": 1,
       "punch_type": "OUT",
-      "punch_time": "2016-01-02 11:00:00"
+      "punch_time": "2016-01-02 11:00:00",
+      "last_modified": "2016-01-01 00:00:01",
+      "flags": 0
     }
   },
   {
@@ -101,7 +105,9 @@
       "task_id": 2,
       "branch_id": 1,
       "punch_type": "IN",
-      "punch_time": "2016-01-03 10:00:00"
+      "punch_time": "2016-01-03 10:00:00",
+      "last_modified": "2016-01-01 00:00:01",
+      "flags": 0
     }
   },
   {
@@ -112,7 +118,9 @@
       "task_id": 2,
       "branch_id": 1,
       "punch_type": "OUT",
-      "punch_time": "2016-01-03 12:00:00"
+      "punch_time": "2016-01-03 12:00:00",
+      "last_modified": "2016-01-01 00:00:01",
+      "flags": 0
     }
   },
   {
@@ -123,7 +131,9 @@
       "task_id": 3,
       "branch_id": 2,
       "punch_type": "IN",
-      "punch_time": "2016-01-03 11:00:00"
+      "punch_time": "2016-01-03 11:00:00",
+      "last_modified": "2016-01-01 00:00:01",
+      "flags": 0
     }
   },
   {
@@ -134,7 +144,9 @@
       "task_id": 3,
       "branch_id": 2,
       "punch_type": "OUT",
-      "punch_time": "2016-01-03 12:00:00"
+      "punch_time": "2016-01-03 12:00:00",
+      "last_modified": "2016-01-01 00:00:01",
+      "flags": 0
     }
   },
   {
@@ -145,7 +157,9 @@
       "task_id": 1,
       "branch_id": 1,
       "punch_type": "IN",
-      "punch_time": "2016-01-04 09:00:00"
+      "punch_time": "2016-01-04 09:00:00",
+      "last_modified": "2016-01-01 00:00:01",
+      "flags": 0
     }
   }
 ]
