@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.utils import timezone
 
 class Branch(models.Model):
     branch_name = models.CharField(max_length=64)
@@ -14,7 +15,7 @@ class Volunteer(models.Model):
     staff_id = models.IntegerField(unique=True)
 
 class PunchTime(models.Model):
-    volunteeer_id = models.ForeignKey(
+    volunteer_id = models.ForeignKey(
             Volunteer,
             on_delete=models.CASCADE
     )
@@ -36,3 +37,13 @@ class PunchTime(models.Model):
     punch_time = models.DateTimeField()
     flags = models.IntegerField()
     last_modified = models.DateTimeField(auto_now=True)
+
+#author = jacob wadowski
+class Post(models.Model):
+    author = models.ForeignKey('auth.User')
+    title = models.CharField(max_length=200)
+    text = models.TextField()
+    created_date = models.DateTimeField(
+            default=timezone.now)
+    published_date = models.DateTimeField(
+            blank=True, null=True)

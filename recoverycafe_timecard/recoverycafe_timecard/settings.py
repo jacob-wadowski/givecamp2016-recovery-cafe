@@ -56,7 +56,7 @@ ROOT_URLCONF = 'recoverycafe_timecard.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['../timecard/templates/'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

@@ -17,3 +17,5 @@ tests/.coverage
 build/
 tests/report/
 .DS_Store
+.idea/
+db.sqlite3
