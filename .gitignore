@@ -16,4 +16,6 @@ tests/coverage_html/
 tests/.coverage
 build/
 tests/report/
+db.sqlite3
+
 .DS_Store
