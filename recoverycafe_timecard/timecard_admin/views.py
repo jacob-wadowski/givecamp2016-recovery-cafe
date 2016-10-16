@@ -1,10 +1,7 @@
 from django.http import HttpResponse
-from django.db import connection
 from django.shortcuts import render
 
 from timecard.models import LastKnownStatus, PunchTime, Task
-
-DB_CURSOR = connection.cursor()
 
 
 def render_admin_page(request):
