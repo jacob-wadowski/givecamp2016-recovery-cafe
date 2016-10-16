@@ -31,14 +31,17 @@ $(function() {
             $('#errorMsg').text(data.msg);
             $('#failNotification').removeClass("hidden");
         }else{
-            $('#notifName').text("Thank you for clocking in " + data.volunteer_id + "! Remember to clock out when you leave!");
+            $('#notifName').text("Thank you for clocking in " + data.volunteer.last_name + "! Remember to clock out when you leave!");
             $('#successNotification').removeClass("hidden");
         }
+        //clear user id input field
+        $('#userID').val("");
         setTimeout(function(){
-            //clear the user id and msgs
-            $('#userID').val("");
+            //clear msgs
             $('#notifName').text("");
-        }, 5000);
+            $('#successNotification').addClass("hidden");
+            $('#failNotification').addClass("hidden");
+        }, 3000);
     }).fail(function(data){
         console.log("Error: " + JSON.stringify(data));
     });
@@ -54,18 +57,21 @@ $(function() {
       flags: 0,
       csrfmiddlewaretoken: window.CSRF_TOKEN
     }).done(function(data) {
-        if(data.status === "NO USER"){
+        if(data.status === "DUPLICATE" || data.status === "NO USER"){
             $('#errorMsg').text(data.msg);
             $('#failNotification').removeClass("hidden");
         }else{
-            $('#notifName').text("Thank you for clocking out " + data.volunteer_id + ". Hope to see you again soon!");
+            $('#notifName').text("Thank you for clocking out " + data.volunteer.last_name + ". Hope to see you again soon!");
             $('#successNotification').removeClass("hidden");
         }
+        //clear user id input field
+        $('#userID').val("");
         setTimeout(function(){
-            //clear the user id and msgs
-            $('#userID').val("");
+            //clear msgs
             $('#notifName').text("");
-        }, 5000);
+            $('#successNotification').addClass("hidden");
+            $('#failNotification').addClass("hidden");
+        }, 3000);
     }).fail(function(data){
         console.log("Error: " + JSON.stringify(data));
     });
