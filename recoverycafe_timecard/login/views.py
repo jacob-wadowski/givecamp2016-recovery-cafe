@@ -30,7 +30,7 @@ def login(request):
                 return HttpResponseRedirect(reverse(render_volunteer_page))
 
         except AttributeError:  # If user account doesn't exist/some other error, show friendly error message
-            response = HttpResponseBadRequest("rip")
+            response = HttpResponseBadRequest("Invalid or missing login info. Make sure no fields are empty, and that the username exists in the system.")
             return render(request, 'login/login.html', {'response': response.content})
 
     return render(request, 'login/login.html')
