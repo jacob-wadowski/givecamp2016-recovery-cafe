@@ -20,6 +20,7 @@ class Volunteer(models.Model):
     first_name = models.CharField(max_length=64)
     last_name = models.CharField(max_length=64)
     staff_id = models.IntegerField(unique=True)
+    active = models.BooleanField(default=True)
 
     def __unicode__(self):
         return u'User(%s %s)' % (self.first_name, self.last_name)
