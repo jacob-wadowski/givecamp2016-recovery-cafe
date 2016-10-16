@@ -97,4 +97,8 @@ $(function() {
       $(elementToRemoveSelector).closest("tr").remove();
     });
   });
+
+  $('#importfile').on('change', function() {
+      $('#importform').submit();
+  });
 });
