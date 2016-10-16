@@ -52,6 +52,7 @@ class PunchTime(models.Model):
         return u'PunchTime(%s %s, %s, %s)' % (self.volunteer_id.first_name, self.volunteer_id.last_name, self.get_punch_type_display(), unicode(self.punch_time))
 
 class Report(models.Model):
+    id = models.CharField(max_length=256, primary_key=True)
     staff_id = models.IntegerField()
     first_name = models.CharField(max_length=64)
     last_name = models.CharField(max_length=64)
@@ -59,18 +60,23 @@ class Report(models.Model):
     task_name = models.CharField(max_length=64)
     punch_time_in = models.DateTimeField()
     punch_time_out = models.DateTimeField()
-    session_time = models.IntegerField()
-    flags = models.IntegerField()
+    session_time_hours = models.FloatField()
 
     class Meta:
         managed = False
-        db_table = 'timecard_view_report'
+        db_table = 'view_report'
+
+    def save(self, *args, **kwargs):
+        pass
+
+    def delete(self, *args, **kwargs):
+        pass
 
 class LastKnownStatus(models.Model):
+    id = models.CharField(max_length=256, primary_key=True)
     staff_id = models.IntegerField()
     first_name = models.CharField(max_length=64)
     last_name = models.CharField(max_length=64)
-    task_name = models.CharField(max_length=64)
     punch_time_latest = models.DateTimeField()
     punch_type_latest = models.CharField(
             max_length=8,
@@ -82,4 +88,10 @@ class LastKnownStatus(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'timecard_view_last_known_status'
+        db_table = 'view_last_known_status'
+
+    def save(self, *args, **kwargs):
+        pass
+
+    def delete(self, *args, **kwargs):
+        pass
