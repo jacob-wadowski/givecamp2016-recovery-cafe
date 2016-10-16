@@ -1,4 +1,4 @@
-
+import StringIO
 import pandas as pd
 import xlsxwriter
 from xlsxwriter.utility import xl_rowcol_to_cell
@@ -89,7 +89,8 @@ def excel_report_creator(data):
 	#### prints to excel
 	#####################
 
-	writer = pd.ExcelWriter("recoverycafe_volunteer_report.xlsx", engine='xlsxwriter')
+	output = StringIO.StringIO()
+	writer = pd.ExcelWriter(output, engine='xlsxwriter')
 
 	# set title format
 	workbook  = writer.book
@@ -183,5 +184,5 @@ def excel_report_creator(data):
 	#
 	### write excel file
 	#
-	return raw_df.ix[:,1:]
-	#return writer
+
+	return output
