@@ -1,5 +1,5 @@
 from django.http import HttpResponse, QueryDict, HttpResponseRedirect
-from django.db import connection
+from django.db import connection, transaction
 from django.shortcuts import render
 from django.urls import reverse
 
@@ -42,12 +42,17 @@ def remove_task(request):
     Task.objects.filter(id=selected_task_id).delete()
     return HttpResponse(json.dumps({'task_id': selected_task_id}), content_type='application/json')
 
+@transaction.atomic()
 def import_volunteers(request):
+    print request.FILES
     if 'volunteers' in request.FILES:
         f = request.FILES['volunteers']
+        print f.name
         records = get_volunteer_records(f.name, f)
         for r in records:
-            Volunteer.objects.update_or_create(staff_id=r.staff_id,
-                    defaults=r)
+            print r
+            #obj, _ = Volunteer.objects.update_or_create(
+            #        staff_id=r.staff_id, defaults=r)
+            #obj.save()
 
     return HttpResponseRedirect(reverse(render_admin_page))
