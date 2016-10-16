@@ -1,4 +1,4 @@
-from odsreader import ODSReader
+from .odsreader import ODSReader
 
 KEYS = ('is_active', 'staff_id', '_staff_name')
 
