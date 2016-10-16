@@ -19,6 +19,7 @@ class Migration(migrations.Migration):
                 CREATE VIEW view_report AS
                 
                 SELECT
+                    CAST(a.volunteer_id_id AS char) || CAST(a.branch_id_id AS char) || CAST(a.task_id_id AS char) || CAST(a.punch_time_in AS char) AS id,
                     b.staff_id,
                     b.first_name,
                     b.last_name,
