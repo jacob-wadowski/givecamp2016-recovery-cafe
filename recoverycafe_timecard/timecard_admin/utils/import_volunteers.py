@@ -38,5 +38,5 @@ def read_data(file_name, file):
 
 def get_volunteer_records(file_name, file):
     data = read_data(file_name, file)
-    records = find_records(filtered_data)
+    records = find_records(data)
     return records

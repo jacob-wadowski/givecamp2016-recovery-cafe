@@ -5,6 +5,7 @@ from django.urls import reverse
 
 import json
 from timecard.models import LastKnownStatus, PunchTime, Task, Volunteer
+from utils.import_volunteers import get_volunteer_records
 
 
 def render_admin_page(request):
@@ -44,15 +45,11 @@ def remove_task(request):
 
 @transaction.atomic()
 def import_volunteers(request):
-    print request.FILES
     if 'volunteers' in request.FILES:
         f = request.FILES['volunteers']
-        print f.name
         records = get_volunteer_records(f.name, f)
         for r in records:
-            print r
-            #obj, _ = Volunteer.objects.update_or_create(
-            #        staff_id=r.staff_id, defaults=r)
-            #obj.save()
+            obj, _ = Volunteer.objects.update_or_create(
+                    staff_id=r['staff_id'], defaults=r)
 
     return HttpResponseRedirect(reverse(render_admin_page))
