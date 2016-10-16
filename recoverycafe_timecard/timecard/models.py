@@ -44,7 +44,7 @@ class PunchTime(models.Model):
                 ('OUT', 'Punch Out'),
             )
     )
-    punch_time = models.DateTimeField()
+    punch_time = models.DateTimeField(auto_now_add=True)
     flags = models.IntegerField()
     last_modified = models.DateTimeField(auto_now=True)
 
