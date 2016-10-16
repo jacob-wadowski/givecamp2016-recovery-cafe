@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.utils import timezone
 
 class Branch(models.Model):
     branch_name = models.CharField(max_length=64)
