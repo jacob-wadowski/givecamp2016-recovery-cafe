@@ -10,10 +10,11 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('timecard', '0001_initial'),
+        ('timecard', '0002_auto_20161015_2220'),
     ]
 
     operations = [
-            migrations.RunSQL('DROP VIEW view_last_known_status;'),
+            migrations.RunSQL('DROP VIEW IF EXISTS view_last_known_status;'),
             migrations.RunSQL('''
     CREATE VIEW view_last_known_status AS
     SELECT
