@@ -55,7 +55,7 @@ class PunchTimeViewSet(viewsets.ModelViewSet):
                     return Response(content)
 
             # Handle never ever logged in, and trying to log out
-            if last_punch.count() == 0 and punch_type == 'OUT':
+            if last_punch is None and punch_type == 'OUT':
                 content = {
                     'status': 'ERROR',
                     'msg': 'You cannot log out if you have never logged in...'
