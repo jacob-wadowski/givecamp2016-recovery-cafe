@@ -4,4 +4,4 @@ from django.shortcuts import render
 
 
 def render_admin_page(request):
-	return render(request, 'adminView/admin.htm')
+	return render(request, 'admin.htm')
