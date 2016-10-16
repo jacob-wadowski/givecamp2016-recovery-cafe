@@ -90,10 +90,9 @@ class ReportView(generic.View):
 
     def generate_response(self, start_date, end_date):
         data = get_report_data(start_date, end_date)
-        import pdb; pdb.set_trace()
         # Generate XLSX file from data
         xlsx = excel_report_creator(data)
-
+        import pdb; pdb.set_trace()
         # ... Magic is done. Return response.
         attachment = 'attachment; filename="Report Data.xlsx"'
         response = HttpResponse(xlsx, content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
