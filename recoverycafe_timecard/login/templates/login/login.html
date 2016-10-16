@@ -1,33 +1,41 @@
-{% block main %}
-    <div id="login">
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+    <div id="login" class="container col-md-4 col-md-offset-4" style="padding-top:5%;text-align:center">
         <form class="form-horizontal" name="LoginForm" action="/login/" method="post">
-        {% csrf_token %}
-        {% if next %}
-            <input type="hidden" name="next" value="{{ next }}" />
-        {% endif %}
-        <div class="control-group">
-            <label class="control-label" for="username">Username</label>
-            <div class="controls">
-                <input type="text" id="username" name="username"  placeholder="Username">
+            {% csrf_token %}
+            {% if next %}
+                <input type="hidden" name="next" value="{{ next }}" />
+            {% endif %}
+            <h1>Timecard App Console</h1>
+            <span style="font-size:large">Please sign in with your super-admin account to start the timecard app.</span>
+            <hr>
+            <div class="control-group">
+                <label class="control-label" for="username">Username</label>
+                <div class="controls">
+                    <input type="text" id="username" name="username"  placeholder="Username">
+                </div>
             </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label" for="password">Password</label>
-            <div class="controls">
-                <input type="password" name="password" id="password" placeholder="Password">
+            <div class="control-group">
+                <label class="control-label" for="password">Password</label>
+                <div class="controls">
+                    <input type="password" name="password" id="password" placeholder="Password">
+                </div>
             </div>
-        </div>
-	<div class="control-group">
-            <label class="control-label" for="branch">Branch</label>
-            <div class="controls">
-                <input type="number" id="branch" name="branch"  placeholder="Branch">
+            <div class="control-group">
+                <label class="control-label" for="branch">Branch</label>
+                <div class="controls">
+                    <input type="number" id="branch" name="branch"  placeholder="Branch">
+                </div>
             </div>
-        </div>
-        <div class="control-group">
-            <div class="controls">
-                <button type="submit" class="btn">Login</button>
+            <div class="control-group">
+                <div class="controls" style="margin-top:15px;">
+                    <button type="submit" class="btn btn-default">Login</button>
+                </div>
             </div>
-        </div>
         </form>
+        <div style="margin:15px;color:red">{{ response }}</div>
+        <div style="font-size:x-small;color:#d3d3d3;margin-top:10%">Built for the Recovery Cafe - Seattle WA</div>
     </div>
 {% endblock %}

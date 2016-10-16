@@ -23,9 +23,14 @@ def login(request):
             request.session['branch']=branch
             authLogin(request, user)
 
-        if (user.has_perm('login.supervision_permission')):
-            return HttpResponseRedirect(reverse(render_admin_page))
-        else:
-            return HttpResponseRedirect(reverse(render_volunteer_page))
+        try:
+            if (user.has_perm('login.supervision_permission')):
+                return HttpResponseRedirect(reverse(render_admin_page))
+            else:
+                return HttpResponseRedirect(reverse(render_volunteer_page))
+
+        except AttributeError:  # If user account doesn't exist/some other error, show friendly error message
+            response = HttpResponseBadRequest("rip")
+            return render(request, 'login/login.html', {'response': response.content})
 
     return render(request, 'login/login.html')
