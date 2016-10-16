@@ -2,10 +2,11 @@
 {% load staticfiles%}
 
 {% block content %}
-  <div class="container col-sm-4 col-sm-offset-2" style="padding-top:15%">
+<div class="container col-sm-12 center-block">
+  <div class="container col-sm-5 col-sm-offset-2" style="padding-top:15%">
     <img class="img-responsive" src="{% static 'img/logo.jpg' %}">
   </div>
-  <div class="container col-sm-6" style="padding-top:15%">
+  <div class="container col-sm-4" style="padding-top:20%">
     <form method="POST" class="form-horizontal">
       {% csrf_token %}
       <div class="form-group">
@@ -37,6 +38,8 @@
       </div>
     </form>
   </div>
+</div>
+<div class="container col-sm-6 col-sm-offset-3">
   <div class="container col-sm-6 col-sm-offset-3">
     <div class="hidden" id="successNotification" style="text-align:center">
       <h3><span id="notifName"></span></h3>
@@ -45,9 +48,10 @@
       <h3><span id="errorMsg"></span>!</h3>
     </div>
   </div>
+</div>
   <nav class="navbar navbar-default navbar-fixed-bottom">
       <div class="container">
-          <a href="{% url 'login' %}" class="btn btn-default navbar-btn navbar-left col-xs-6" style="font-size:20px">Logout</a>
+          <a href="{% url 'login' %}" class="btn btn-default navbar-btn navbar-left col-sm-6 col-sm-offset-3" style="font-size:20px">Logout</a>
       </div>
   </nav>
 {% endblock %}
