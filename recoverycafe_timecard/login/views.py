@@ -8,16 +8,19 @@ from django.contrib.auth import login as authLogin
 
 from timecard.views import render_volunteer_page
 from timecard_admin.views import render_admin_page
+from timecard.models import Branch
 
 
 def login(request):
     logout(request)
     username = password = branch = ''
+    queryset_branches = Branch.objects.all()
+
     if request.POST:
         username = request.POST['username']
         password = request.POST['password']
         branch = request.POST['branch']
-    
+
         user = authenticate(username=username, password=password)
         if user is not None and user.is_active:
             request.session['branch']=branch
@@ -33,4 +36,4 @@ def login(request):
             response = HttpResponseBadRequest("Invalid or missing login info. Make sure no fields are empty, and that the username exists in the system.")
             return render(request, 'login/login.html', {'response': response.content})
 
-    return render(request, 'login/login.html')
+    return render(request, 'login/login.html', {'branches': queryset_branches})

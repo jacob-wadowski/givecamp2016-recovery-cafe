@@ -12,4 +12,4 @@ def receive_json(request):
 
 def render_volunteer_page(request):
     queryset_tasks = Task.objects.all()  # List of tasks
-    return render(request, 'volunteer.html', {'task_list': queryset_tasks})
+    return render(request, 'volunteer.html', {'task_list': queryset_tasks, 'branch': request.session['branch']})
