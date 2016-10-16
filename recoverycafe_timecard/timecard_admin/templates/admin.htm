@@ -68,9 +68,11 @@
                     </table>
                     <nav class="navbar navbar-default navbar-fixed-bottom">
                         <div class="container">
-                            <a href="{% url 'login' %}" class="btn btn-default navbar-btn navbar-left">Logout</a>
+
+                            <a href="{% url 'login' %}" class="btn btn-default navbar-btn navbar-left col-xs-6" style="font-size:24px">Logout</a>
+
                             <form class="form-inline">
-                                <div class="form-group navbar-right">
+                                <div class="form-group navbar-right col-xs-6">
                                     <!-- <input type="file" class="btn btn-default navbar-btn navbar-right">Import</button> -->
                                     <label for="import">Import</label>
                                     <input type="file" class="form-control" id="import" value="Import">
@@ -102,8 +104,10 @@
                     </table>
                     <nav class="navbar navbar-default navbar-fixed-bottom">
                         <div class="container">
-                            <button type="button" class="btn btn-default navbar-btn navbar-left">Logout</button>
-                            <button type="button" class="btn btn-default navbar-btn navbar-right" data-toggle="modal" data-target="#myModal">Add</button>
+
+                            <button type="button" class="btn btn-default navbar-btn navbar-left col-xs-6" style="font-size:24px">Logout</button>
+                            <button type="button" class="btn btn-default navbar-btn navbar-right col-xs-6" data-toggle="modal" data-target="#myModal" style="font-size:24px">Add</button>
+
                         </div>
                     </nav>
                     <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
@@ -143,7 +147,9 @@
                     </div>
                     <nav class="navbar navbar-default navbar-fixed-bottom">
                         <div class="container">
-                            <a href="{% url 'login' %}" class="btn btn-default navbar-btn navbar-left">Logout</a>
+
+                            <a href="{% url 'login' %}" class="btn btn-default navbar-btn navbar-left col-xs-12" style="font-size:24px">Logout</a>
+
                         </div>
                     </nav>
                 </div>
