@@ -7,6 +7,7 @@
         <!-- {% block body_block %} -->
         <nav class="navbar navbar-default">
             <a class="navbar-brand" href="#">Recovery Cafe Admin</a>
+            <a class="btn btn-default navbar-btn" href="{% url 'render_volunteer_page' %}" style="font-size:20px">Go To Timecard</a>
             <ul class="nav navbar-nav navbar-right hidden">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Branch <span class="caret"></span></a>
@@ -55,11 +56,12 @@
                     <nav class="navbar navbar-default navbar-fixed-bottom">
                         <div class="container">
                             <a href="{% url 'login' %}" class="btn btn-default navbar-btn navbar-left col-xs-6" style="font-size:20px">Logout</a>
-                            <form class="form-inline">
+                            <form id="importform" class="form-inline" action="{% url 'import_volunteers' %}" method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
                                 <div class="form-group navbar-right col-xs-6">
                                     <!-- <input type="file" class="btn btn-default navbar-btn navbar-right">Import</button> -->
                                     <label for="import">Import</label>
-                                    <input type="file" class="form-control" id="import" value="Import" style="margin-top:10px;font-size:16px">
+                                    <input type="file" class="form-control" id="importfile" name="volunteers" style="margin-top:10px;font-size:16px">
                                 </div>
                             </form>
                         </div>

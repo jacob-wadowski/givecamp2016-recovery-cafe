@@ -10,6 +10,7 @@ from timecard.views import render_volunteer_page
 from timecard_admin.views import render_admin_page
 from timecard.models import Branch
 
+from .models import *
 
 def login(request):
     logout(request)
@@ -19,7 +20,7 @@ def login(request):
     if request.POST:
         username = request.POST['username']
         password = request.POST['password']
-        branch = request.POST['branch']
+        branch = request.POST.get('branch', Branch.objects.first())
 
         user = authenticate(username=username, password=password)
         if user is not None and user.is_active:
@@ -27,7 +28,7 @@ def login(request):
             authLogin(request, user)
 
         try:
-            if (user.has_perm('login.supervision_permission')):
+            if (user.has_perm(SUPERVISIONPERMISSION)):
                 return HttpResponseRedirect(reverse(render_admin_page))
             else:
                 return HttpResponseRedirect(reverse(render_volunteer_page))
