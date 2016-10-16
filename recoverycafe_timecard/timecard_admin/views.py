@@ -10,6 +10,8 @@ from login.models import *
 
 from django.contrib.auth.decorators import user_passes_test, login_required
 
+import json
+
 DB_CURSOR = connection.cursor()
 
 @login_required
