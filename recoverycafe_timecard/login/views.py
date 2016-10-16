@@ -18,7 +18,7 @@ def login(request):
             request.session['branch']=branch
             authLogin(request, user)
 
-        if (user.has_perm('login.supervisor_permission')):
+        if (user.has_perm('login.supervision_permission')):
             return HttpResponse("Supervisor level")
         else:
             return HttpResponse("Volunteer level")
