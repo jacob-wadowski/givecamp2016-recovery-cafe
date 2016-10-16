@@ -37,7 +37,7 @@ $(function() {
       provided_task_name: $("#addTaskModal #taskName").val(),
       csrfmiddlewaretoken: window.CSRF_TOKEN
     }).done(function(data) {
-        $("#taskTblContents").html(data.html);
+        console.log(data);
     });
   });
 });
