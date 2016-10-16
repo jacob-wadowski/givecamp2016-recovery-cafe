@@ -11,15 +11,15 @@ def login(request):
     if request.POST:
         username = request.POST['username']
         password = request.POST['password']
-	branch = request.POST['branch']
-	
+        branch = request.POST['branch']
+    
         user = authenticate(username=username, password=password)
         if user is not None and user.is_active:
-		request.session['branch']=branch
-                authLogin(request, user)
+            request.session['branch']=branch
+            authLogin(request, user)
 
-		if(user.has_perm('login.supervisor_permission')):
-			return HttpResponse("Supervisor level")
-		else:
-			return HttpResponse("Volunteer level")
+        if (user.has_perm('login.supervisor_permission')):
+            return HttpResponse("Supervisor level")
+        else:
+            return HttpResponse("Volunteer level")
     return render(request, 'login/login.html')
