@@ -19,7 +19,7 @@ def login(request):
     if request.POST:
         username = request.POST['username']
         password = request.POST['password']
-        branch = request.POST['branch']
+        branch = request.POST.get('branch', Branch.objects.first())
 
         user = authenticate(username=username, password=password)
         if user is not None and user.is_active:
