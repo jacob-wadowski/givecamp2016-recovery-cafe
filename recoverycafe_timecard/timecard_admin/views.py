@@ -1,4 +1,4 @@
-from django.http import HttpResponse, QueryDict
+from django.http import HttpResponse, QueryDict, HttpResponseRedirect
 from django.db import connection
 from django.shortcuts import render
 from django.urls import reverse
@@ -50,4 +50,4 @@ def import_volunteers(request):
             Volunteer.objects.update_or_create(staff_id=r.staff_id,
                     defaults=r)
 
-    return HTTPRedirectResponse(url=reverse(render_admin_volunteers_page))
+    return HttpResponseRedirect(url=reverse(render_admin_volunteers_page))
