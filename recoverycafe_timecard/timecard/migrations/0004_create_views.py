@@ -18,6 +18,7 @@ class Migration(migrations.Migration):
             migrations.RunSQL('''
                 CREATE VIEW view_last_known_status AS
                 SELECT
+                    c.staff_id AS id,
                     c.staff_id,
                     c.first_name,
                     c.last_name,
