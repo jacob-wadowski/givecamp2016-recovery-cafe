@@ -12,3 +12,4 @@ class PunchTimeSerializer(serializers.ModelSerializer):
         model = PunchTime
         fields = ('id', 'volunteer_id', 'task_id', 'branch_id',
                 'punch_type', 'punch_time', 'flags', 'last_modified',)
+

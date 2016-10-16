@@ -45,7 +45,7 @@ class PunchTime(models.Model):
             )
     )
     punch_time = models.DateTimeField(auto_now_add=True)
-    flags = models.IntegerField()
+    flags = models.IntegerField(blank=True, null=True)
     last_modified = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
