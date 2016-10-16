@@ -57,6 +57,7 @@
                         <div class="container">
                             <a href="{% url 'login' %}" class="btn btn-default navbar-btn navbar-left col-xs-6" style="font-size:20px">Logout</a>
                             <form id="importform" class="form-inline" action="{% url 'import_volunteers' %}" method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
                                 <div class="form-group navbar-right col-xs-6">
                                     <!-- <input type="file" class="btn btn-default navbar-btn navbar-right">Import</button> -->
                                     <label for="import">Import</label>
