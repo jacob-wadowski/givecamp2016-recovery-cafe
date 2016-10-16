@@ -7,6 +7,7 @@ from django.views import generic
 from timecard.models import LastKnownStatus, PunchTime, Task, Volunteer
 from .utils.import_volunteers import get_volunteer_records
 from .utils.export_data import get_report_data
+from .utils.excel_report_creator import excel_report_creator
 
 from login.models import *
 
@@ -91,7 +92,7 @@ class ReportView(generic.View):
         data = get_report_data(start_date, end_date)
 
         # Generate XLSX file from data
-        xlsx = None # <<<<< SET to XLSX
+        xlsx = excel_report_creator(data)
 
         # ... Magic is done. Return response.
         attachment = 'attachment; filename="Report Data.xlsx"'
