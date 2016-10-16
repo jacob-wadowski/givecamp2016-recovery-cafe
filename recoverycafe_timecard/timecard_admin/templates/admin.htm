@@ -74,13 +74,14 @@
                         <tbody>
                           {% for task in task_list %}
                             <tr>
-                                <td>{{task.Name}}</td>
+                                <td>{{task.task_name}}</td>
                                 <td>
-                                    <button type="button" class="btn btn-default btn-sm">
+                                    <button type="button" class="btn btn-default btn-sm" data-taskID="{{task.id}}">
                                         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                     </button>
                                 </td>
                             </tr>
+                          {% endfor %}
                         </tbody>
                     </table>
                     <nav class="navbar navbar-default navbar-fixed-bottom">
