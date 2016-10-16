@@ -16,6 +16,17 @@
   <script src="{% static 'js/jquery-3.1.1.min.js' %}"></script>
   <script src="{% static 'js/bootstrap.min.js' %}"></script>
   <script src="{% static 'js/bootstrap-datepicker.min.js' %}"></script>
+  <script>
+    {% if messages %}
+      var notifyMessages = [
+        {% for message in messages %}
+          { 'message': '{{ message }}', 'level': '{{ message.tags }}' },
+        {% endfor %}
+      ];
+    {% else %}
+      var notifyMessages = undefined;
+    {% endif %}
+  </script>
   <script src="{% static 'js/index.js' %}"></script>
 </body>
 </html>

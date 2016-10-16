@@ -9,6 +9,7 @@ from utils.import_volunteers import get_volunteer_records
 from login.models import *
 
 from django.contrib.auth.decorators import user_passes_test, login_required
+from django.contrib import messages
 
 DB_CURSOR = connection.cursor()
 
@@ -60,5 +61,7 @@ def import_volunteers(request):
         for r in records:
             obj, _ = Volunteer.objects.update_or_create(
                     staff_id=r['staff_id'], defaults=r)
+            
+        messages.add_message(request, messages.INFO, 'Imported %d volunteers' % len(records))
 
     return HttpResponseRedirect(reverse(render_admin_page))
