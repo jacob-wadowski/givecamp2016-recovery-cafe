@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'login.apps.LoginConfig',
     'timecard.apps.TimecardConfig',
     'timecard_admin.apps.TimecardAdminConfig',
     'django.contrib.admin',
