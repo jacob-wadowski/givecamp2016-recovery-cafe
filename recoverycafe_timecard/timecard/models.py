@@ -50,3 +50,36 @@ class PunchTime(models.Model):
 
     def __unicode__(self):
         return u'PunchTime(%s %s, %s, %s)' % (self.volunteer_id.first_name, self.volunteer_id.last_name, self.get_punch_type_display(), unicode(self.punch_time))
+
+class Report(models.Model):
+    staff_id = models.IntegerField()
+    first_name = models.CharField(max_length=64)
+    last_name = models.CharField(max_length=64)
+    branch_name = models.CharField(max_length=64)
+    task_name = models.CharField(max_length=64)
+    punch_time_in = models.DateTimeField()
+    punch_time_out = models.DateTimeField()
+    session_time = models.IntegerField()
+    flags = models.IntegerField()
+
+    class Meta:
+        managed = False
+        db_table = 'timecard_view_report'
+
+class LastKnownStatus(models.Model):
+    staff_id = models.IntegerField()
+    first_name = models.CharField(max_length=64)
+    last_name = models.CharField(max_length=64)
+    task_name = models.CharField(max_length=64)
+    punch_time_latest = models.DateTimeField()
+    punch_type_latest = models.CharField(
+            max_length=8,
+            choices = (
+                ('IN', 'Punch In'),
+                ('OUT', 'Punch Out'),
+            )
+    )
+
+    class Meta:
+        managed = False
+        db_table = 'timecard_view_last_known_status'
