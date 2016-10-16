@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.db import connection
 from django.shortcuts import render
 
-from ..timecard.models import Task, PunchTime
+from timecard.models import Task, PunchTime
 
 DB_CURSOR = connection.cursor()
 
