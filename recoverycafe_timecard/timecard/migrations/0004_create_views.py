@@ -1,11 +1,16 @@
 ### script creates views
 
+# DEPENDENCIES:
+# db is created prior to running
+
 from django.db import connection
 
 # set cursor
 cursor = connection.cursor()
 
-# create view_last_known_status
+# create view_last_known_status	
+cursor.execute("DROP VIEW view_last_known_status")
+
 cursor.execute('''
     CREATE VIEW view_last_known_status AS
     SELECT
