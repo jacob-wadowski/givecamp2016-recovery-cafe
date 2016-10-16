@@ -33,7 +33,7 @@ def render_admin_reports_page(request):
 def add_task(request):
     task_name_text = QueryDict(request.body)['provided_task_name']
     new_task = Task.objects.create(task_name=task_name_text)
-    task_newest_entry = Task.objects.filter(id=new_task.id)  # Type: <class 'timecard.models.Task'>
+    task_newest_entry = Task.objects.filter(id=new_task.id)[0]  # Type: <class 'timecard.models.Task'>
     return HttpResponse(json.dumps({'task_id': task_newest_entry.id, \
                                     'task_name': task_newest_entry.task_name}), content_type='application/json')
 
