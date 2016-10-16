@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 
 import json
+from .models import LastKnownStatus, PunchTime, Task
 
 
 def receive_json(request):
@@ -10,4 +11,5 @@ def receive_json(request):
 
 
 def render_volunteer_page(request):
-    return render(request, 'volunteer.html')
+    queryset_tasks = Task.objects.all()  # List of tasks
+    return render(request, 'volunteer.html', {'task_list': queryset_tasks})
