@@ -3,28 +3,37 @@ from django.db import connection, transaction
 from django.shortcuts import render
 from django.urls import reverse
 
-import json
 from timecard.models import LastKnownStatus, PunchTime, Task, Volunteer
 from utils.import_volunteers import get_volunteer_records
 
+from login.models import *
 
+from django.contrib.auth.decorators import user_passes_test, login_required
+
+DB_CURSOR = connection.cursor()
+
+@login_required
+@user_passes_test(lambda u: u.has_perm(SUPERVISIONPERMISSION))
 def render_admin_page(request):
     queryset_volunteers = LastKnownStatus.objects.filter(punch_type_latest='IN')
     queryset_tasks = Task.objects.all()  # List of tasks
     queryset_reports = PunchTime.objects.all()  # One workbook w/multiple sheets
     return render(request, 'admin.htm', {'volunteer_list': queryset_volunteers, 'task_list': queryset_tasks, 'reports': queryset_reports})
 
-
+@login_required
+@user_passes_test(lambda u: u.has_perm(SUPERVISIONPERMISSION))
 def render_admin_volunteers_page(request):
     queryset_volunteers = LastKnownStatus.objects.all()
     return render(request, 'admin_volunteers.html', {'volunteer_list': queryset_volunteers})
 
-
+@login_required
+@user_passes_test(lambda u: u.has_perm(SUPERVISIONPERMISSION))
 def render_admin_tasks_page(request):
     queryset_tasks = Task.objects.all()  # List of tasks
     return render(request, 'admin_tasks.html', {'task_list': queryset_tasks})
 
-
+@login_required
+@user_passes_test(lambda u: u.has_perm(SUPERVISIONPERMISSION))
 def render_admin_reports_page(request):
     queryset_reports = PunchTime.objects.all()  # One workbook w/multiple sheets
     return render(request, 'admin_reports.html', {'reports': queryset_reports})
