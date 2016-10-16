@@ -16,23 +16,22 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='LastKnownStatus',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.CharField(max_length=256, primary_key=True)),
                 ('staff_id', models.IntegerField()),
                 ('first_name', models.CharField(max_length=64)),
                 ('last_name', models.CharField(max_length=64)),
-                ('task_name', models.CharField(max_length=64)),
                 ('punch_time_latest', models.DateTimeField()),
                 ('punch_type_latest', models.CharField(choices=[('IN', 'Punch In'), ('OUT', 'Punch Out')], max_length=8)),
             ],
             options={
-                'db_table': 'timecard_view_last_known_status',
+                'db_table': 'view_last_known_status',
                 'managed': False,
             },
         ),
         migrations.CreateModel(
             name='Report',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.CharField(max_length=256, primary_key=True)),
                 ('staff_id', models.IntegerField()),
                 ('first_name', models.CharField(max_length=64)),
                 ('last_name', models.CharField(max_length=64)),
@@ -40,11 +39,10 @@ class Migration(migrations.Migration):
                 ('task_name', models.CharField(max_length=64)),
                 ('punch_time_in', models.DateTimeField()),
                 ('punch_time_out', models.DateTimeField()),
-                ('session_time', models.IntegerField()),
-                ('flags', models.IntegerField()),
+                ('session_time_hours', models.FloatField()),
             ],
             options={
-                'db_table': 'timecard_view_report',
+                'db_table': 'view_report',
                 'managed': False,
             },
         ),
