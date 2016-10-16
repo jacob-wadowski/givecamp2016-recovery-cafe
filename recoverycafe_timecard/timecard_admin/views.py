@@ -1,7 +1,5 @@
-from django.http import HttpResponse, HttpResponseRedirect, QueryDict
-from django.template.loader import render_to_string
-from django.shortcuts import render, redirect
-from django.urls import reverse
+from django.http import HttpResponse, QueryDict
+from django.shortcuts import render
 
 import json
 
