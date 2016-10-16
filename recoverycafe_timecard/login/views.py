@@ -9,6 +9,7 @@ from django.contrib.auth import login as authLogin
 from timecard.views import render_volunteer_page
 from timecard_admin.views import render_admin_page
 
+
 def login(request):
     logout(request)
     username = password = branch = ''
@@ -26,4 +27,5 @@ def login(request):
             return HttpResponseRedirect(reverse(render_admin_page))
         else:
             return HttpResponseRedirect(reverse(render_volunteer_page))
+
     return render(request, 'login/login.html')
