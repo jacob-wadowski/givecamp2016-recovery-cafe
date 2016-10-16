@@ -38,6 +38,16 @@
                             </tr>
                         </thead>
                         <tbody>
+			{% for volunteer in volunteer_list %}
+                            <tr>
+                                <td>{{volunteer.id}}</td>
+                                <td>{{volunteer.first_name}}</td>
+                                <td>{{volunteer.last_name}}</td>
+                                <td>{{volunteer.status}}</td>
+                                <td>{{volunteer.Clocked}}</td>
+                                <td>{{volunteer.Time}}</td>
+                            </td>
+			{% endfor %}
                             <tr>
                                 <th scope="row">101</th>
                                 <td>Jack</td>
