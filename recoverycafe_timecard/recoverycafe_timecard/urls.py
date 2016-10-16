@@ -23,5 +23,5 @@ urlpatterns = [
     url(r'^login/', include('login.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^timecard/', include('timecard.urls')),
-	url(r'^adminView/', include('timecard_admin.urls'))
+    url(r'^adminView/', include('timecard_admin.urls'))
 ]
