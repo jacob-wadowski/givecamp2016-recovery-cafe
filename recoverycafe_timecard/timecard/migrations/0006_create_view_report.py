@@ -40,6 +40,7 @@ class Migration(migrations.Migration):
                         ON in_.volunteer_id_id = out_.volunteer_id_id
                         AND in_.punch_time < out_.punch_time
                     WHERE in_.punch_type = "IN"
+                        AND (out_.punch_type = "OUT" OR out_.punch_type IS NULL)
                     GROUP BY 
                         in_.volunteer_id_id,
                         in_.branch_id_id,
