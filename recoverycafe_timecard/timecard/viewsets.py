@@ -35,31 +35,32 @@ class PunchTimeViewSet(viewsets.ModelViewSet):
             last_punch = PunchTime.objects.filter(volunteer_id=volunteer_id
                     ).order_by('-punch_time').first()
 
-            # Duplicate punch types.
-            if last_punch.punch_type == punch_type:
-                if punch_type == 'IN':
-                    # JSON that says you're already logged in.
-                    content = {
-                        'status': 'DUPLICATE',
-                        'msg': 'You already logged in at {}'.format(
-                                last_punch.punch_time.strftime('%c'))
-                    }
-                    return Response(content)
-                else:
-                    # JSON that says you already logged out.
-                    content = {
-                        'status': 'DUPLICATE',
-                        'msg': 'You already logged out at {}'.format(
-                                last_punch.punch_time.strftime('%c'))
-                    }
-                    return Response(content)
-
             # Handle never ever logged in, and trying to log out
-            if last_punch is None and punch_type == 'OUT':
-                content = {
-                    'status': 'ERROR',
-                    'msg': 'You cannot log out if you have never logged in...'
-                }
-                return Response(content)
+            if last_punch is None:
+                if punch_type == 'OUT':
+                    content = {
+                        'status': 'ERROR',
+                        'msg': 'You cannot logout if you\'ve never logged in...'
+                    }
+                    return Response(content)
+            else:
+                # Duplicate punch types.
+                if last_punch.punch_type == punch_type:
+                    if punch_type == 'IN':
+                        # JSON that says you're already logged in.
+                        content = {
+                            'status': 'DUPLICATE',
+                            'msg': 'You already logged in at {}'.format(
+                                    last_punch.punch_time.strftime('%c'))
+                        }
+                        return Response(content)
+                    else:
+                        # JSON that says you already logged out.
+                        content = {
+                            'status': 'DUPLICATE',
+                            'msg': 'You already logged out at {}'.format(
+                                    last_punch.punch_time.strftime('%c'))
+                        }
+                        return Response(content)
 
         return super(PunchTimeViewSet, self).create(request, *args, **kwargs)
