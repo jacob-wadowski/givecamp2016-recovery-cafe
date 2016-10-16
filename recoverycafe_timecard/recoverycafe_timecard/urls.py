@@ -19,9 +19,17 @@ Including another URLconf
 from django.contrib import admin
 from django.conf.urls import url, include
 
+from . import views
+
 urlpatterns = [
+    url(r'^$', views.HomePage.as_view(), name='homepage'),
     url(r'^login/', include('login.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^timecard/', include('timecard.urls')),
-    url(r'^adminView/', include('timecard_admin.urls'))
+    url(r'^adminView/', include('timecard_admin.urls')),
+
+    # REST API
+    url(r'^api/', include('recoverycafe_timecard.routers', namespace='api')),
+    url(r'^api-auth/', include('rest_framework.urls',
+            namespace='rest_framework')),
 ]
