@@ -1,9 +1,10 @@
 from django.http import HttpResponse, QueryDict
+from django.db import connection
 from django.shortcuts import render
+from django.urls import reverse
 
 import json
-
-from timecard.models import LastKnownStatus, PunchTime, Task
+from timecard.models import LastKnownStatus, PunchTime, Task, Volunteer
 
 
 def render_admin_page(request):
@@ -40,3 +41,13 @@ def remove_task(request):
     selected_task_id = QueryDict(request.body)['button_task_id']
     Task.objects.filter(id=selected_task_id).delete()
     return HttpResponse(json.dumps({'task_id': selected_task_id}), content_type='application/json')
+
+def import_volunteers(request):
+    if 'volunteers' in request.FILES:
+        f = request.FILES['volunteers']
+        records = get_volunteer_records(f.name, f)
+        for r in records:
+            Volunteer.objects.update_or_create(staff_id=r.staff_id,
+                    defaults=r)
+
+    return HTTPRedirectResponse(url=reverse(render_admin_volunteers_page))
