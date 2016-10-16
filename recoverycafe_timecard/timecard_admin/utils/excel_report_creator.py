@@ -3,15 +3,17 @@ import pandas as pd
 import xlsxwriter
 from xlsxwriter.utility import xl_rowcol_to_cell
 
+import datetime
 
-def excel_report_creator(raw_df):
+
+def excel_report_creator(data):
 	"function that generates a standardized excel report"
 	# coding: utf-8
 
 	# ## test excel report export creator
 
 	# In[1]:
-
+	raw_df = pd.DataFrame(data=data, columns=['id','staff_id','first_name','last_name','branch_name','task_name','punch_time_in','punch_time_out','session_time_hours'])
 
 
 	# In[2]:
@@ -19,6 +21,8 @@ def excel_report_creator(raw_df):
 
 	# clean up data types
 	df = raw_df.copy()
+
+
 	df.punch_time_in = pd.to_datetime(df.punch_time_in)
 	df.punch_time_out = pd.to_datetime(df.punch_time_out)
 
