@@ -90,7 +90,7 @@ class ReportView(generic.View):
 
     def generate_response(self, start_date, end_date):
         data = get_report_data(start_date, end_date)
-
+        import pdb; pdb.set_trace()
         # Generate XLSX file from data
         xlsx = excel_report_creator(data)
 
