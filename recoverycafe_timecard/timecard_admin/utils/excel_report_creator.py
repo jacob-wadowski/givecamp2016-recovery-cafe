@@ -183,5 +183,5 @@ def excel_report_creator(data):
 	#
 	### write excel file
 	#
-
-	return writer
+	return raw_df.ix[:,1:]
+	#return writer
