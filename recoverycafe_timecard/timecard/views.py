@@ -5,5 +5,4 @@ from django.shortcuts import render
 from .forms import PostForm
 
 def render_volunteer_page(request):
-    form = PostForm()
-    return render(request, 'volunteer.html', {'form': form})
+    return render(request, 'volunteer.html')
