@@ -96,6 +96,7 @@ $(function() {
       elementToRemoveSelector = "#tasksTable button[data-taskID=" + data.task_id + "]";
       $(elementToRemoveSelector).closest("tr").remove();
     });
+  });
 
   $('#importfile').on('change', function() {
       $('#importform').submit();
