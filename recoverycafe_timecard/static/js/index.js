@@ -30,4 +30,14 @@ $(function() {
       $('#successNotification').removeClass("hidden");
     });
   });
+
+  $("#addTask").click(function(e) {
+    e.preventDefault();
+    $.post('/adminView/admin/add_task/', {
+      provided_task_name: $("#addTaskModal #taskName").val(),
+      csrfmiddlewaretoken: window.CSRF_TOKEN
+    }).done(function(data) {
+        $("#taskTblContents").html(data.html);
+    });
+  });
 });
