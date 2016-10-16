@@ -50,4 +50,4 @@ def import_volunteers(request):
             Volunteer.objects.update_or_create(staff_id=r.staff_id,
                     defaults=r)
 
-    return HttpResponseRedirect(url=reverse(render_admin_volunteers_page))
+    return HttpResponseRedirect(reverse(render_admin_page))
