@@ -36,22 +36,3 @@ def add_task(request):
     task_newest_entry = Task.objects.filter(id=new_task.id)[0]  # Type: <class 'timecard.models.Task'>
     return HttpResponse(json.dumps({'task_id': task_newest_entry.id, \
                                     'task_name': task_newest_entry.task_name}), content_type='application/json')
-
-    # queryset_tasks = Task.objects.all()  # List of tasks
-    # queryset_reports = PunchTime.objects.all()  # One workbook w/multiple sheets
-    # queryset_task_list_refreshed = Task.objects.all()
-    # # url = reverse(render_admin_page, kwargs={'task_list': queryset_task_list_refreshed})
-    # url = reverse(render_admin_page, {'volunteer_list': queryset_volunteers, 'task_list': queryset_tasks, 'reports': queryset_reports})
-    # return redirect(url)
-
-    # tbl_html = render_to_string('task_tbl_contents.html', {'task_list': queryset_task_list_refreshed})
-    # result = {'html': tbl_html}
-    # return HttpResponse(QueryDict(request.body), content_type='application/json')
-    # return HttpResponse("<script>console.log('yo.')</script>")
-
-    # Task.objects.create(task_name=task_name_text)
-    # queryset_task_list_refreshed = Task.objects.all()
-    # return render(request, 'task_tbl_contents.html', {'task_list': queryset_task_list_refreshed})
-    #
-    #
-    # return render(request, 'task_tbl_contents.html', {'new_task_name': task_name_text, 'new_task_record': task_newest_entry})
