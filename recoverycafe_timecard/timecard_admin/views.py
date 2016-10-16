@@ -34,3 +34,9 @@ def add_task(request):
     task_newest_entry = Task.objects.filter(id=new_task.id)[0]  # Type: <class 'timecard.models.Task'>
     return HttpResponse(json.dumps({'task_id': task_newest_entry.id, \
                                     'task_name': task_newest_entry.task_name}), content_type='application/json')
+
+
+def remove_task(request):
+    selected_task_id = QueryDict(request.body)['button_task_id']
+    Task.objects.filter(id=selected_task_id).delete()
+    return HttpResponse(json.dumps({'task_id': selected_task_id}), content_type='application/json')
