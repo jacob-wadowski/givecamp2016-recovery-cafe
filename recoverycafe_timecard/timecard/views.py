@@ -10,4 +10,4 @@ def receive_json(request):
 
 
 def render_volunteer_page(request):
-    return render(request, 'volunteer.html')
+    return render(request, 'volunteer.html', {'branch': request.session['branch']})
