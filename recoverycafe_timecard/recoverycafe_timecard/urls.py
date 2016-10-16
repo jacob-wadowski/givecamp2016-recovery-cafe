@@ -19,5 +19,6 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^timecard/', include('timecard.urls'))
+    url(r'^timecard/', include('timecard.urls')),
+    url(r'^timecard_admin/', include('timecard_admin.urls'))
 ]
