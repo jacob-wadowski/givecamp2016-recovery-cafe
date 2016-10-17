@@ -123,20 +123,22 @@
                 <!--Reports tab-->
                 <div role="tabpanel" class="tab-pane" id="reports">
                   <div class="col-md-12">
-                    <div class="col-md-3 col-md-offset-3" style="padding:10px">
-                        <h3>Date From</h3>
-                        <div id="datepicker-from"></div>
-                    </div>
-                    <div class="col-md-3" style="padding:10px">
-                        <h3>Date To</h3>
-                        <div id="datepicker-to"></div>
-                    </div>
-                    <nav class="navbar navbar-default navbar-fixed-bottom">
-                        <div class="container">
-                            <a href="{% url 'login' %}" class="btn btn-default navbar-btn navbar-left col-xs-6" style="font-size:20px">Logout</a>
-                            <input class="btn btn-default navbar-btn navbar-right col-xs-6" type="submit" value="Download" style="font-size:20px">
+                    <form action="{% url 'report_view' %}" method="post" accept-charset="utf-8">
+                        {% csrf_token %}
+                        <div class="col-md-3 col-md-offset-3" style="padding:10px">
+                            <h3>Date From</h3>
+                            <input id="datepicker-from" type="text" name="start_date" value="" class="form-control" placeholder="MM/DD/YYYY">
                         </div>
-                    </nav>
+                        <div class="col-md-3" style="padding:10px">
+                            <h3>Date To</h3>
+                            <input id="datepicker-to" type="text" name="end_date" value="" class="form-control" placeholder="MM/DD/YYYY">                    </div>
+                        <nav class="navbar navbar-default navbar-fixed-bottom">
+                            <div class="container">
+                                <a href="{% url 'login' %}" class="btn btn-default navbar-btn navbar-left col-xs-6" style="font-size:20px">Logout</a>
+                                <input class="btn btn-default navbar-btn navbar-right col-xs-6" type="submit" value="Download" style="font-size:20px">
+                            </div>
+                        </nav>
+                    </form>
                   </div>
                 </div>
             </div>

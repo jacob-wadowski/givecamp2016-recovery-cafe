@@ -14,7 +14,7 @@ from login.models import *
 from django.contrib.auth.decorators import user_passes_test, login_required
 from django.contrib import messages
 
-import json
+import json, re
 
 DB_CURSOR = connection.cursor()
 
@@ -88,11 +88,23 @@ class ReportView(generic.View):
 
         return self.generate_response(start_date, end_date)
 
+    def format_date(self, date_text):
+        datepicker_format = re.compile('\d+/\d+/\d+')
+        if datepicker_format.match(date_text):
+            date_array = date_text.split('/')
+            MM = date_array[0]
+            DD = date_array[1]
+            YYYY = date_array[2]
+            return YYYY + '-' + MM + '-' + DD
+        else:
+            return date_text
+
     def generate_response(self, start_date, end_date):
-        data = get_report_data(start_date, end_date)
+        data = get_report_data(
+                self.format_date(start_date),
+                self.format_date(end_date))
         # Generate XLSX file from data
         xlsx = excel_report_creator(data)
-        import pdb; pdb.set_trace()
         # ... Magic is done. Return response.
         attachment = 'attachment; filename="Report Data.xlsx"'
         response = HttpResponse(xlsx, content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')

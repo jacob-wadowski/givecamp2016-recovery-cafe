@@ -3,13 +3,15 @@ $(function() {
   $('#datepicker-from').datepicker({
     keyboardNavigation: false,
     autoclose: true,
-    todayHighlight: true
+    todayHighlight: true,
+    orientation: 'bottom'
   });
 
   $('#datepicker-to').datepicker({
     keyboardNavigation: false,
     autoclose: true,
-    todayHighlight: true
+    todayHighlight: true,
+    orientation: 'bottom'
   });
 
   $('#myTabs a').click(function(e) {

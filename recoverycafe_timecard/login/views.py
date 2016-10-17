@@ -20,11 +20,11 @@ def login(request):
     if request.POST:
         username = request.POST['username']
         password = request.POST['password']
-        branch = request.POST.get('branch', Branch.objects.first())
+        branch = request.POST.get('branch', Branch.objects.first().id)
 
         user = authenticate(username=username, password=password)
         if user is not None and user.is_active:
-            request.session['branch']=branch
+            request.session['branch'] = branch
             authLogin(request, user)
 
         try:
