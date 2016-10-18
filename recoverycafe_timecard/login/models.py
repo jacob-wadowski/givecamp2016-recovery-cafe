@@ -1,10 +1,11 @@
 from __future__ import unicode_literals
 from django.db import models
 
-SUPERVISIONPERMISSION = u'login.supervision_permission'
+SUPERVISION_PERMISSION = u'supervision_permission'
+FULL_SUPERVISION_PERMISSION = u'login.' + SUPERVISION_PERMISSION
 
 class Login(models.Model):
     class Meta:
         permissions = (
-            (SUPERVISIONPERMISSION, "Can access admin views"),
+            (SUPERVISION_PERMISSION, "Can access admin views"),
         )

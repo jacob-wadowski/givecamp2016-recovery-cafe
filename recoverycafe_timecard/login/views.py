@@ -28,7 +28,7 @@ def login(request):
             authLogin(request, user)
 
         try:
-            if (user.has_perm(SUPERVISIONPERMISSION)):
+            if (user.has_perm(FULL_SUPERVISION_PERMISSION)):
                 return HttpResponseRedirect(reverse(render_admin_page))
             else:
                 return HttpResponseRedirect(reverse(render_volunteer_page))

@@ -24,7 +24,7 @@ from . import views
 urlpatterns = [
     url(r'^$', views.HomePage.as_view(), name='homepage'),
     url(r'^login/', include('login.urls')),
-    url(r'^accounts/login/$', include('login.urls')),#necessary for @login_required failed
+    url(r'^accounts/login/', include('login.urls')),#necessary for @login_required failed
     url(r'^admin/', admin.site.urls),
     url(r'^timecard/', include('timecard.urls')),
     url(r'^adminView/', include('timecard_admin.urls')),
