@@ -1,4 +1,5 @@
-from io import StringIO, BytesIO
+import StringIO
+import io
 import pandas as pd
 import xlsxwriter
 from xlsxwriter.utility import xl_rowcol_to_cell
@@ -71,9 +72,9 @@ def excel_report_creator(data):
     #####################
 
     if sys.version_info < (3,2):
-        output = StringIO
+        output = StringIO.StringIO()
     else:
-        output = BytesIO()
+        output = io.BytesIO()
     writer = pd.ExcelWriter(output, engine='xlsxwriter')
 
     # set title format
