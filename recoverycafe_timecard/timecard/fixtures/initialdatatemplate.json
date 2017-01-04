@@ -1,0 +1,77 @@
+[
+{
+    "model": "auth.group",
+    "pk": 1,
+    "fields": {
+        "name": "administrators",
+        "permissions": [
+            4
+        ]
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$30000$2X7uJpSBXbS3$3v9oYktGavcTfYDV4csRkpx6hU1dLQzjjEuB6qQbuuA=",
+        "last_login": "2016-10-16T18:09:30.856Z",
+        "is_superuser": true,
+        "username": "superuser",
+        "first_name": "",
+        "last_name": "",
+        "email": "superuser@superuser.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2016-10-16T18:03:04.277Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 2,
+    "fields": {
+        "password": "pbkdf2_sha256$30000$UADBsZgI2j14$bCgv3FDFDOFm/uuBc+6a2gAMBdlbKUvdcqnM48D8Fww=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "admin",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2016-10-16T18:05:30Z",
+        "groups": [
+            1
+        ],
+        "user_permissions": [
+            4
+        ]
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 3,
+    "fields": {
+        "password": "pbkdf2_sha256$30000$QNjMn7sGwbXJ$/ZqYr/NJwMfKa1B6enSMHJpxOjnYhs0/2Z6l2sTOlWQ=",
+        "last_login": "2016-10-16T18:09:51.072Z",
+        "is_superuser": false,
+        "username": "timeclock",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2016-10-16T18:07:03Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "timecard.branch",
+    "pk": 1,
+    "fields": {
+        "branch_name": "Seattle"
+    }
+}
+]
