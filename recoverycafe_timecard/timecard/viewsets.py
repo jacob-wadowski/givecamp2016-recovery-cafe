@@ -24,12 +24,17 @@ class PunchTimeViewSet(viewsets.ModelViewSet):
                         volunteer_staff_id)
             }
             return Response(content)
+
+        # Volunteer.pk is the foreign key used by PunchTime model (it's the auto-generated ID in the volunteer table, not the staff ID)
         volunteer_auto_id = volunteer.pk
+
+        # Creating copy of request data dict in order to modify it before serializing it/validating
+        # (as the staff ID needs to be switched out for the auto-generated volunteer ID)
         data_dict_copy = request.data.copy()
-        data_dict_copy['volunteer_id'] = volunteer_auto_id  # Auto-increment ID for volunteer model
-        serializer = self.get_serializer(data=data_dict_copy)
+        data_dict_copy['volunteer_id'] = volunteer_auto_id
+
+        serializer = self.get_serializer(data=data_dict_copy)  # Updated this code to use the modified request.data dict
         if serializer.is_valid():
-            # volunteer_staff_id = serializer.validated_data.get('volunteer_pk_id')
             branch_id = serializer.validated_data.get('branch_id')
             task_id = serializer.validated_data.get('task_id')
             punch_type = serializer.validated_data.get('punch_type')
@@ -65,8 +70,17 @@ class PunchTimeViewSet(viewsets.ModelViewSet):
                         }
                         return Response(content)
 
-        request.data._mutable = True  # See if there's a better way
-        request.data['volunteer_id'] = volunteer_auto_id  # Switch volunteer_id from staff ID to foreign key value
-        request.POST._mutable = True  # See if there's a better way
-        request.POST['volunteer_id'] = volunteer_auto_id  # Switch volunteer_id from staff ID to foreign key value
+        # Making the request object mutable, in order to update the value for 'volunteer_id' before using the request
+        request.data._mutable = True
+        request.POST._mutable = True
+
+        # Modifying the request object to send the auto-generated volunteer ID in the 'volunteer_id' field
+        # (it will fail otherwise, as it will try to send the staff ID for 'volunteer_id' in the PunchTime model)
+        request.data['volunteer_id'] = volunteer_auto_id
+        request.POST['volunteer_id'] = volunteer_auto_id
+
+        # Setting request back to being immutable
+        request.data._mutable = False
+        request.POST._mutable = False
+
         return super(PunchTimeViewSet, self).create(request, *args, **kwargs)
