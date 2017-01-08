@@ -23,5 +23,5 @@ class PunchTimeSerializer(serializers.ModelSerializer):
     class Meta:
         model = PunchTime
         fields = ('id', 'volunteer_id', 'volunteer', 'task_id', 'branch_id',
-                'punch_type', 'punch_time', 'flags', 'last_modified',)
+                'punch_type', 'punch_time', 'flags', 'last_modified')
 
