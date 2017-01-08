@@ -1,0 +1,14 @@
+#importform{
+    position: relative;
+}
+
+#b{
+    width: 300px;
+}
+
+.tooltip-inner {
+    background-color: transparent;
+    max-width: 450px;
+    /* If max-width does not work, try using width instead */
+    width: 450px;
+}

@@ -103,4 +103,13 @@ $(function() {
   $('#importfile').on('change', function() {
       $('#importform').submit();
   });
+
+  $(document).ready(function(){
+    $("#importform[data-toggle='tooltip']").tooltip({
+        animated: 'fade',
+        placement: 'top',
+        html: true
+    });
+  });
+
 });

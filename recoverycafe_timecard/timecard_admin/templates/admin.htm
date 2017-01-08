@@ -33,8 +33,7 @@
                         <thead>
                             <tr>
                                 <th scope="row">Staff #</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
+                                <th>Volunteer Name</th>
                                 <!--<th>Status</th>-->
                                 <th>Clocked</th>
                                 <th>Time</th>
@@ -44,7 +43,6 @@
                         {% for volunteer in volunteer_list %}
                             <tr>
                                 <td>{{volunteer.staff_id}}</td>
-                                <td>{{volunteer.first_name}}</td>
                                 <td>{{volunteer.last_name}}</td>
                                 <!--<td>{{volunteer.status}}</td>-->  <!-- Not in view -->
                                 <td>{{volunteer.punch_type_latest}}</td>
@@ -56,7 +54,7 @@
                     <nav class="navbar navbar-default navbar-fixed-bottom">
                         <div class="container">
                             <a href="{% url 'login' %}" class="btn btn-default navbar-btn navbar-left col-xs-6" style="font-size:20px">Logout</a>
-                            <form id="importform" class="form-inline" action="{% url 'import_volunteers' %}" method="POST" enctype="multipart/form-data">
+                            <form id="importform" data-toggle="tooltip" data-trigger="hover" title="<img id='importTemplate' src='{% static 'img/import-template.jpg' %}' />" class="form-inline" action="{% url 'import_volunteers' %}" method="POST" enctype="multipart/form-data">
                                 {% csrf_token %}
                                 <div class="form-group navbar-right col-xs-6">
                                     <!-- <input type="file" class="btn btn-default navbar-btn navbar-right">Import</button> -->

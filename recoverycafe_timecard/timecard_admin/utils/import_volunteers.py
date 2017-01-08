@@ -1,6 +1,6 @@
 from .odsreader import ODSReader
 
-KEYS = ('is_active', 'staff_id', '_staff_name')
+KEYS = ('is_active', 'staff_id', 'staff_name')
 
 def has_keys(row):
     return all([k in row for k in KEYS])

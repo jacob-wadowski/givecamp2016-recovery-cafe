@@ -9,7 +9,7 @@
   <title>Recovery Cafe - Admin</title>
 </head>
 
-<body>
+<link>
     {% block content %}
     {% endblock %}
   <script type="text/javascript"> window.CSRF_TOKEN = "{{ csrf_token }}"; </script>
@@ -28,5 +28,6 @@
     {% endif %}
   </script>
   <script src="{% static 'js/index.js' %}"></script>
+  <link href="{% static 'css/admin-view.css' %}" rel="stylesheet">
 </body>
 </html>
