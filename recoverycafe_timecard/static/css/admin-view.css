@@ -2,10 +2,6 @@
     position: relative;
 }
 
-#b{
-    width: 300px;
-}
-
 .tooltip-inner {
     background-color: transparent;
     max-width: 450px;
