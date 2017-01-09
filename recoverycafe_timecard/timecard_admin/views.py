@@ -24,7 +24,8 @@ def render_admin_page(request):
     queryset_volunteers = LastKnownStatus.objects.filter(punch_type_latest='IN')
     queryset_tasks = Task.objects.all()  # List of tasks
     queryset_reports = PunchTime.objects.all()  # One workbook w/multiple sheets
-    return render(request, 'admin.htm', {'volunteer_list': queryset_volunteers, 'task_list': queryset_tasks, 'reports': queryset_reports})
+    queryset_volunteer_master_list = Volunteer.objects.all()    #List of all volunteers in the database
+    return render(request, 'admin.htm', {'volunteer_list': queryset_volunteers, 'task_list': queryset_tasks, 'reports': queryset_reports, 'volunteers_master_list': queryset_volunteer_master_list})
 
 @login_required
 @user_passes_test(lambda u: u.has_perm(FULL_SUPERVISION_PERMISSION))
@@ -43,6 +44,13 @@ def render_admin_tasks_page(request):
 def render_admin_reports_page(request):
     queryset_reports = PunchTime.objects.all()  # One workbook w/multiple sheets
     return render(request, 'admin_reports.html', {'reports': queryset_reports})
+
+@login_required
+@user_passes_test(lambda u: u.has_perm(FULL_SUPERVISION_PERMISSION))
+def render_volunteer_master_list_page(request):
+    queryset_ = Task.objects.all()  # List of tasks
+    queryset_volunteer_master_list = Volunteer.objects.all()    #List of all volunteers in the database
+    return render(request, 'volunteers-master.html', {'volunteers_master_list': queryset_volunteer_master_list})
 
 
 def add_task(request):
