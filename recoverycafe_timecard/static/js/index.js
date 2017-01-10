@@ -103,4 +103,18 @@ $(function() {
   $('#importfile').on('change', function() {
       $('#importform').submit();
   });
+
+    $(document).ready(function(){
+        $("#importform[data-toggle='tooltip']").tooltip({
+        animated: 'fade',
+        placement: 'top',
+        html: true
+        });
+
+        //initialize the master list of volunteers into a datatable
+        $('#volunteerMasterListTable').DataTable({
+            paging: false
+        });
+    });
+
 });

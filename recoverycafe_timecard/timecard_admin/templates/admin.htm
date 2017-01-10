@@ -20,21 +20,20 @@
         </nav>
         <div class="container-fluid">
             <ul class="nav nav-tabs" id="myTabs">
-                <li class="active"><a href="#volunteers"><h1>Volunteers</h1></a></li>
-                <li><a href="#tasks"><h1>Tasks</h1></a></li>
-                <li><a href="#reports"><h1>Reports</h1></a></li>
+                <li class="active"><a href="#volunteers"><h3>Clocked In Volunteers</h3></a></li>
+                <li><a href="#tasks"><h3>Tasks</h3></a></li>
+                <li><a href="#reports"><h3>Reports</h3></a></li>
+                <li><a href="#masterListVolunteers"><h3>List Of Volunteers</h3></a></li>
             </ul>
 
-            <!--Active volunteers tab-->
             <div class="tab-content">
+                <!--Active volunteers tab-->
                 <div role="tabpanel" class="tab-pane active" id="volunteers">
-                    <h3 style="margin-top:25px;color:#8f8f8f">Currently clocked-in volunteers</h3>
                     <table class="table table-striped table-responsive" style="margin-top:15px">
                         <thead>
                             <tr>
                                 <th scope="row">Staff #</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
+                                <th>Volunteer Name</th>
                                 <!--<th>Status</th>-->
                                 <th>Clocked</th>
                                 <th>Time</th>
@@ -44,7 +43,6 @@
                         {% for volunteer in volunteer_list %}
                             <tr>
                                 <td>{{volunteer.staff_id}}</td>
-                                <td>{{volunteer.first_name}}</td>
                                 <td>{{volunteer.last_name}}</td>
                                 <!--<td>{{volunteer.status}}</td>-->  <!-- Not in view -->
                                 <td>{{volunteer.punch_type_latest}}</td>
@@ -56,7 +54,7 @@
                     <nav class="navbar navbar-default navbar-fixed-bottom">
                         <div class="container">
                             <a href="{% url 'login' %}" class="btn btn-default navbar-btn navbar-left col-xs-6" style="font-size:20px">Logout</a>
-                            <form id="importform" class="form-inline" action="{% url 'import_volunteers' %}" method="POST" enctype="multipart/form-data">
+                            <form id="importform" data-toggle="tooltip" data-trigger="hover" title="<img id='importTemplate' src='{% static 'img/import-template.jpg' %}' />" class="form-inline" action="{% url 'import_volunteers' %}" method="POST" enctype="multipart/form-data">
                                 {% csrf_token %}
                                 <div class="form-group navbar-right col-xs-6">
                                     <!-- <input type="file" class="btn btn-default navbar-btn navbar-right">Import</button> -->
@@ -67,7 +65,6 @@
                         </div>
                     </nav>
                 </div>
-
                 <!--Tasks tab-->
                 <div role="tabpanel" class="tab-pane" id="tasks">
                     <table id="tasksTable" class="table table-striped table-responsive">
@@ -119,7 +116,6 @@
                       </div>
                     </div>
                 </div>
-
                 <!--Reports tab-->
                 <div role="tabpanel" class="tab-pane" id="reports">
                   <div class="col-md-12">
@@ -141,6 +137,43 @@
                     </form>
                   </div>
                 </div>
+                <!--Master List Of Volunteers tab-->
+                <div role="tabpanel" class="tab-pane" id="masterListVolunteers">
+                    <div id="volunteerScrollList" style="height:300px;overflow-y:scroll">
+                        <table id="volunteerMasterListTable" class="table table-striped table-responsive" style="margin-top:15px">
+                        <thead>
+                            <tr>
+                                <th scope="row">Staff #</th>
+                                <th>Volunteer Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for volunteer in volunteers_master_list %}
+                            <tr>
+                                <td>{{volunteer.staff_id}}</td>
+                                <td>{{volunteer.last_name}}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    </div>
+
+                    <!-- Footer -->
+                    <nav class="navbar navbar-default navbar-fixed-bottom">
+                        <div class="container">
+                            <a href="{% url 'login' %}" class="btn btn-default navbar-btn navbar-center col-xs-6" style="font-size:20px">Logout</a>
+                            <form id="importform" data-toggle="tooltip" data-trigger="hover" title="<img id='importTemplate' src='{% static 'img/import-template.jpg' %}' />" class="form-inline" action="{% url 'import_volunteers' %}" method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="form-group navbar-right col-xs-6">
+                                    <!-- <input type="file" class="btn btn-default navbar-btn navbar-right">Import</button> -->
+                                    <label for="import">Import</label>
+                                    <input type="file" class="form-control" id="importfile" name="volunteers" style="margin-top:10px;font-size:16px">
+                                </div>
+                            </form>
+                        </div>
+                    </nav>
+                </div>
+
             </div>
 
         </div>

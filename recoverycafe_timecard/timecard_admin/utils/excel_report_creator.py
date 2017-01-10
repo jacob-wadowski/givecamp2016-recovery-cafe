@@ -14,7 +14,7 @@ def excel_report_creator(data):
     # ## test excel report export creator
 
     # In[1]:
-    raw_df = pd.DataFrame(data=data, columns=['id','staff_id','first_name','last_name','branch_name','task_name','punch_time_in','punch_time_out','session_time_hours'])
+    raw_df = pd.DataFrame(data=data, columns=['id','staff_id', 'first_name', 'last_name','branch_name','task_name','punch_time_in','punch_time_out','session_time_hours'])
 
 
     # In[2]:
@@ -29,7 +29,7 @@ def excel_report_creator(data):
 
     # In[4]:
     # create new columns
-    df['volunteer_name'] = df.last_name + ", " + df.first_name
+    df['volunteer_name'] = df.last_name
     df['month'] = df['punch_time_in'].dt.month
     df['year'] = df['punch_time_in'].dt.year
 
@@ -78,7 +78,7 @@ def excel_report_creator(data):
     writer = pd.ExcelWriter(output, engine='xlsxwriter')
 
     # set title format
-    workbook  = writer.book
+    workbook = writer.book
     title = workbook.add_format()
     title.set_font_size(20)
     title.set_bold()

@@ -9,13 +9,17 @@
   <title>Recovery Cafe - Admin</title>
 </head>
 
-<body>
+<link>
     {% block content %}
     {% endblock %}
   <script type="text/javascript"> window.CSRF_TOKEN = "{{ csrf_token }}"; </script>
   <script src="{% static 'js/jquery-3.1.1.min.js' %}"></script>
   <script src="{% static 'js/bootstrap.min.js' %}"></script>
   <script src="{% static 'js/bootstrap-datepicker.min.js' %}"></script>
+
+  <!--jQuery Datatables -->
+  <link href="{% static '/DataTables/media/css/jquery.datatables.min.css' %}" rel="stylesheet">
+  <script src="{% static '/DataTables/media/js/jquery.datatables.min.js' %}"></script>
   <script>
     {% if messages %}
       var notifyMessages = [
@@ -28,5 +32,6 @@
     {% endif %}
   </script>
   <script src="{% static 'js/index.js' %}"></script>
+  <link href="{% static 'css/admin-view.css' %}" rel="stylesheet">
 </body>
 </html>
