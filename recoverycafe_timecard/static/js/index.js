@@ -106,9 +106,18 @@ $(function() {
 
     $(document).ready(function(){
         $("#importform[data-toggle='tooltip']").tooltip({
-        animated: 'fade',
-        placement: 'top',
-        html: true
+            animated: 'fade',
+            placement: 'top',
+            html: true
+        });
+
+        $("nav #importform[data-toggle='tooltip']").on("mouseenter", function(){
+            $(this).closest("nav").find(".tooltip-inner").css({
+                "background-color" : "transparent",
+                "max-width" : "450px",
+                /* If max-width does not work, try using width instead */
+                "width" : "450px"
+            });
         });
 
         //initialize the master list of volunteers into a datatable
