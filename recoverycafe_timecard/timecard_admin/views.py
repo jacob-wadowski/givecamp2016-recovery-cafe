@@ -76,7 +76,6 @@ def import_volunteers(request):
                     staff_id=r['staff_id'], defaults=r)
             
         messages.add_message(request, messages.INFO, 'Imported %d volunteers' % len(records))
-        newUsers = True
 
     return HttpResponseRedirect(reverse(render_admin_page))
 
