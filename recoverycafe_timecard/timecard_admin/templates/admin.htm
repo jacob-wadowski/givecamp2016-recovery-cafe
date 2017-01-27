@@ -53,15 +53,7 @@
                     </table>
                     <nav class="navbar navbar-default navbar-fixed-bottom">
                         <div class="container">
-                            <a href="{% url 'login' %}" class="btn btn-default navbar-btn navbar-left col-xs-6" style="font-size:20px">Logout</a>
-                            <form id="importform" data-toggle="tooltip" data-trigger="hover" title="<img id='importTemplate' src='{% static 'img/import-template.jpg' %}' />" class="form-inline" action="{% url 'import_volunteers' %}" method="POST" enctype="multipart/form-data">
-                                {% csrf_token %}
-                                <div class="form-group navbar-right col-xs-6">
-                                    <!-- <input type="file" class="btn btn-default navbar-btn navbar-right">Import</button> -->
-                                    <label for="import">Import</label>
-                                    <input type="file" class="form-control" id="importfile" name="volunteers" style="margin-top:10px;font-size:16px">
-                                </div>
-                            </form>
+                            <a href="{% url 'login' %}" class="btn btn-default navbar-btn navbar-left col-sm-6 col-sm-offset-3" style="font-size:20px">Logout</a>
                         </div>
                     </nav>
                 </div>
