@@ -48,7 +48,6 @@ def render_admin_reports_page(request):
 @login_required
 @user_passes_test(lambda u: u.has_perm(FULL_SUPERVISION_PERMISSION))
 def render_volunteer_master_list_page(request):
-    queryset_ = Task.objects.all()  # List of tasks
     queryset_volunteer_master_list = Volunteer.objects.all()    #List of all volunteers in the database
     return render(request, 'volunteers-master.html', {'volunteers_master_list': queryset_volunteer_master_list})
 

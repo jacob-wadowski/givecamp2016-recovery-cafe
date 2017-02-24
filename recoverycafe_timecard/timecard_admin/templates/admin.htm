@@ -34,19 +34,22 @@
                             <tr>
                                 <th scope="row">Staff #</th>
                                 <th>Volunteer Name</th>
-                                <!--<th>Status</th>-->
                                 <th>Clocked</th>
                                 <th>Time</th>
+                                <th>Check Out</th>
                             </tr>
                         </thead>
                         <tbody>
                         {% for volunteer in volunteer_list %}
-                            <tr>
-                                <td>{{volunteer.staff_id}}</td>
-                                <td>{{volunteer.last_name}}</td>
-                                <!--<td>{{volunteer.status}}</td>-->  <!-- Not in view -->
-                                <td>{{volunteer.punch_type_latest}}</td>
-                                <td>{{volunteer.punch_time_latest}}</td>
+                            <tr data-name="volunteerRow">
+                                <td id="volunteerStaffId">{{volunteer.staff_id}}</td>
+                                <td id="volunteerName">{{volunteer.last_name}}</td>
+                                <td id="volunteerClockedInStatus">{{volunteer.punch_type_latest}}</td>
+                                <td id="volunteerClockInTime">{{volunteer.punch_time_latest}}</td>
+                                <td>
+                                    <button type="button" class="btn btn-danger btn-md" id="adminCheckoutButton">Check Out</button>
+                                    <input id="adminCheckoutTime" type="time" style="display:none"></input>
+                                </td>
                             </tr>
                         {% endfor %}
                         </tbody>

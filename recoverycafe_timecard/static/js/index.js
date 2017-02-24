@@ -25,7 +25,8 @@ $(function() {
       volunteer_id: $('#userID').val(),
       punch_type: "IN",
       branch_id: $("#branchID").val(),
-      task_id: $('#taskSelect').val(),
+      //task_id: $("#taskSelect").find("option:selected").text(),
+        task_id: $("#taskSelect").val(),
       flags: 0,
       csrfmiddlewaretoken: window.CSRF_TOKEN
     }).done(function(data) {
@@ -55,7 +56,7 @@ $(function() {
       volunteer_id: $('#userID').val(),
       punch_type: "OUT",
       branch_id: $("#branchID").val(),
-      task_id: $('#taskSelect').val(),
+      task_name: $("#taskSelect").find("option:selected").text(),
       flags: 0,
       csrfmiddlewaretoken: window.CSRF_TOKEN
     }).done(function(data) {
@@ -125,5 +126,37 @@ $(function() {
             paging: false
         });
     });
+
+    $('#adminCheckoutButton').click(function(e) {
+        console.log("clicked the admin checkout button");
+        console.log($(this).closest("tr").find)
+  // e.preventDefault();
+  // $.post("/api/punchtimes", {
+  //   volunteer_id: $('#userID').val(),
+  //   punch_type: "OUT",
+  //   branch_id: $("#branchID").val(),
+  //   task_id: $('#taskSelect').val(),
+  //   flags: 0,
+  //   csrfmiddlewaretoken: window.CSRF_TOKEN
+  // }).done(function(data) {
+  //     if(data.status === "DUPLICATE" || data.status === "NO USER"){
+  //         $('#errorMsg').text(data.msg);
+  //         $('#failNotification').removeClass("hidden");
+  //     }else{
+  //         $('#notifName').text("Thank you for clocking out " + data.volunteer.last_name + ". Hope to see you again soon!");
+  //         $('#successNotification').removeClass("hidden");
+  //     }
+  //     //clear user id input field
+  //     $('#userID').val("");
+  //     setTimeout(function(){
+  //         //clear msgs
+  //         $('#notifName').text("");
+  //         $('#successNotification').addClass("hidden");
+  //         $('#failNotification').addClass("hidden");
+  //     }, 3000);
+  // }).fail(function(data){
+  //     console.log("Error: " + JSON.stringify(data));
+  // });
+});
 
 });
