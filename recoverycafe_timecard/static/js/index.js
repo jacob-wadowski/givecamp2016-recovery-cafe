@@ -14,7 +14,16 @@ $(function() {
     orientation: 'bottom'
   });
 
-  $('#adminCheckoutTime').datetimepicker({format: 'yyyy-mm-dd hh:ii'});
+  $('#adminCheckoutTime').datetimepicker({
+    format: 'yyyy-mm-dd hh:ii',
+    autoclose: true,
+    todayBtn: true
+  });
+
+  $('#adminCheckoutSubmit').click(function(e) {
+    e.preventDefault();
+    console.log($('#adminCheckoutTime').val);
+  });
 
   $('#myTabs a').click(function(e) {
     e.preventDefault();
