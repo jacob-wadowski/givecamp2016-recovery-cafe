@@ -11,6 +11,8 @@ $(function() {
     autoclose: true,
     todayHighlight: true
   });
+
+  $('#adminCheckoutTime').datetimepicker({format: 'yyyy-mm-dd hh:ii'});
 });
 
 $('#myTabs a').click(function (e) {

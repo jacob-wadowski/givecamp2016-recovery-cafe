@@ -14,6 +14,8 @@ $(function() {
     orientation: 'bottom'
   });
 
+  $('#adminCheckoutTime').datetimepicker({format: 'yyyy-mm-dd hh:ii'});
+
   $('#myTabs a').click(function(e) {
     e.preventDefault();
     $(this).tab('show');
@@ -25,8 +27,7 @@ $(function() {
       volunteer_id: $('#userID').val(),
       punch_type: "IN",
       branch_id: $("#branchID").val(),
-      //task_id: $("#taskSelect").find("option:selected").text(),
-        task_id: $("#taskSelect").val(),
+      task_id: $('#taskSelect').val(),
       flags: 0,
       csrfmiddlewaretoken: window.CSRF_TOKEN
     }).done(function(data) {
@@ -56,7 +57,7 @@ $(function() {
       volunteer_id: $('#userID').val(),
       punch_type: "OUT",
       branch_id: $("#branchID").val(),
-      task_name: $("#taskSelect").find("option:selected").text(),
+      task_id: $('#taskSelect').val(),
       flags: 0,
       csrfmiddlewaretoken: window.CSRF_TOKEN
     }).done(function(data) {
@@ -104,59 +105,4 @@ $(function() {
   $('#importfile').on('change', function() {
       $('#importform').submit();
   });
-
-    $(document).ready(function(){
-        $("#importform[data-toggle='tooltip']").tooltip({
-            animated: 'fade',
-            placement: 'top',
-            html: true
-        });
-
-        $("nav #importform[data-toggle='tooltip']").on("mouseenter", function(){
-            $(this).closest("nav").find(".tooltip-inner").css({
-                "background-color" : "transparent",
-                "max-width" : "450px",
-                /* If max-width does not work, try using width instead */
-                "width" : "450px"
-            });
-        });
-
-        //initialize the master list of volunteers into a datatable
-        $('#volunteerMasterListTable').DataTable({
-            paging: false
-        });
-    });
-
-    $('#adminCheckoutButton').click(function(e) {
-        console.log("clicked the admin checkout button");
-        console.log($(this).closest("tr").find)
-  // e.preventDefault();
-  // $.post("/api/punchtimes", {
-  //   volunteer_id: $('#userID').val(),
-  //   punch_type: "OUT",
-  //   branch_id: $("#branchID").val(),
-  //   task_id: $('#taskSelect').val(),
-  //   flags: 0,
-  //   csrfmiddlewaretoken: window.CSRF_TOKEN
-  // }).done(function(data) {
-  //     if(data.status === "DUPLICATE" || data.status === "NO USER"){
-  //         $('#errorMsg').text(data.msg);
-  //         $('#failNotification').removeClass("hidden");
-  //     }else{
-  //         $('#notifName').text("Thank you for clocking out " + data.volunteer.last_name + ". Hope to see you again soon!");
-  //         $('#successNotification').removeClass("hidden");
-  //     }
-  //     //clear user id input field
-  //     $('#userID').val("");
-  //     setTimeout(function(){
-  //         //clear msgs
-  //         $('#notifName').text("");
-  //         $('#successNotification').addClass("hidden");
-  //         $('#failNotification').addClass("hidden");
-  //     }, 3000);
-  // }).fail(function(data){
-  //     console.log("Error: " + JSON.stringify(data));
-  // });
-});
-
 });

@@ -5,21 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" media="screen">
   <link href="{% static 'css/bootstrap-datepicker.standalone.min.css' %}" rel="stylesheet" media="screen">
+  <link href="{% static 'css/bootstrap-datetimepicker.min.css' %}" rel="stylesheet" media="screen">
 
   <title>Recovery Cafe - Admin</title>
 </head>
 
-<link>
+<body>
     {% block content %}
     {% endblock %}
   <script type="text/javascript"> window.CSRF_TOKEN = "{{ csrf_token }}"; </script>
   <script src="{% static 'js/jquery-3.1.1.min.js' %}"></script>
   <script src="{% static 'js/bootstrap.min.js' %}"></script>
   <script src="{% static 'js/bootstrap-datepicker.min.js' %}"></script>
-
-  <!--jQuery Datatables -->
-  <link href="{% static 'DataTables/media/css/jquery.dataTables.min.css' %}" rel="stylesheet">
-  <script src="{% static 'DataTables/media/js/jquery.dataTables.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap-datetimepicker.min.js' %}"></script>
   <script>
     {% if messages %}
       var notifyMessages = [
@@ -32,6 +30,5 @@
     {% endif %}
   </script>
   <script src="{% static 'js/index.js' %}"></script>
-  <link href="{% static 'css/admin-view.css' %}" rel="stylesheet">
 </body>
 </html>
