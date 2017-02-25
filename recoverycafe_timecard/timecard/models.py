@@ -47,7 +47,17 @@ class PunchTime(models.Model):
     )
     punch_time = models.DateTimeField(auto_now_add=True)
     flags = models.IntegerField(blank=True, null=True)
+    isAdminCheckout = models.IntegerField(blank=True, null=True)
+    adminCheckoutTime = models.CharField(max_length=50)
     last_modified = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        if kwargs.pop('overrideTime', False):
+            #self.lastupdatetime = datetime.datetime.now()
+            self.punch_time = kwargs['overrideTime']
+
+        import pdb; pdb.set_trace()
+        super(PunchTime, self).save(*args, **kwargs)
 
     def __unicode__(self):
         return u'PunchTime(%s %s, %s, %s)' % (self.volunteer_id.first_name, self.volunteer_id.last_name, self.get_punch_type_display(), unicode(self.punch_time))

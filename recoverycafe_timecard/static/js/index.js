@@ -56,7 +56,8 @@ $(function() {
       volunteer_id: $('#userID').val(),
       punch_type: "OUT",
       branch_id: $("#branchID").val(),
-      task_name: $("#taskSelect").find("option:selected").text(),
+      //task_name: $("#taskSelect").find("option:selected").text(),
+      task_id: $("#taskSelect").val(),
       flags: 0,
       csrfmiddlewaretoken: window.CSRF_TOKEN
     }).done(function(data) {
@@ -128,35 +129,24 @@ $(function() {
     });
 
     $('#adminCheckoutButton').click(function(e) {
+        var volunteerID = $(this).closest("[data-name='volunteerRow']").find("#volunteerStaffId").text();
         console.log("clicked the admin checkout button");
         console.log($(this).closest("tr").find)
-  // e.preventDefault();
-  // $.post("/api/punchtimes", {
-  //   volunteer_id: $('#userID').val(),
-  //   punch_type: "OUT",
-  //   branch_id: $("#branchID").val(),
-  //   task_id: $('#taskSelect').val(),
-  //   flags: 0,
-  //   csrfmiddlewaretoken: window.CSRF_TOKEN
-  // }).done(function(data) {
-  //     if(data.status === "DUPLICATE" || data.status === "NO USER"){
-  //         $('#errorMsg').text(data.msg);
-  //         $('#failNotification').removeClass("hidden");
-  //     }else{
-  //         $('#notifName').text("Thank you for clocking out " + data.volunteer.last_name + ". Hope to see you again soon!");
-  //         $('#successNotification').removeClass("hidden");
-  //     }
-  //     //clear user id input field
-  //     $('#userID').val("");
-  //     setTimeout(function(){
-  //         //clear msgs
-  //         $('#notifName').text("");
-  //         $('#successNotification').addClass("hidden");
-  //         $('#failNotification').addClass("hidden");
-  //     }, 3000);
-  // }).fail(function(data){
-  //     console.log("Error: " + JSON.stringify(data));
-  // });
+        e.preventDefault();
+        $.post("/api/punchtimes", {
+            volunteer_id: volunteerID,
+            punch_type: "OUT",
+            branch_id: "1", //TODO: consider removing in checkout scenario
+            task_id: "0",   //TODO: consider removing in checkout scenario
+            isAdminCheckout: 1,
+            adminCheckoutTime: "12:00",
+            flags: 0,
+            csrfmiddlewaretoken: window.CSRF_TOKEN
+        }).done(function(data) {
+            console.log('success');
+        }).fail(function(data){
+           console.log("Error: " + JSON.stringify(data));
+        });
 });
 
 });

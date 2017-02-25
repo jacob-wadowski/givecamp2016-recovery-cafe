@@ -9,6 +9,7 @@ class PunchTimeViewSet(viewsets.ModelViewSet):
     """
     API endpoint for the PunchTime data.
     """
+
     queryset = PunchTime.objects.select_related('volunteer_id')
     serializer_class = PunchTimeSerializer
 
@@ -38,9 +39,14 @@ class PunchTimeViewSet(viewsets.ModelViewSet):
             branch_id = serializer.validated_data.get('branch_id')
             task_id = serializer.validated_data.get('task_id')
             punch_type = serializer.validated_data.get('punch_type')
+            isAdminCheckout = serializer.validated_data.get('isAdminCheckout')
 
             last_punch = PunchTime.objects.filter(volunteer_id=volunteer_auto_id
                     ).order_by('-punch_time').first()
+
+            if isAdminCheckout:
+                adminCheckoutTime = serializer.validated_data.get('adminCheckoutTime')
+                last_punch.save(overrideTime=adminCheckoutTime)
 
             # Handle never ever logged in, and trying to log out
             if last_punch is None:
