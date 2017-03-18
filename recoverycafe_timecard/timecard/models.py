@@ -51,15 +51,6 @@ class PunchTime(models.Model):
     adminCheckoutTime = models.DateTimeField(max_length=50, null=True)
     last_modified = models.DateTimeField(auto_now=True)
 
-    # def save(self, *args, **kwargs):
-    #     if kwargs.pop('overrideTime', False):
-    #         #self.lastupdatetime = datetime.datetime.now()
-    #         self.punch_time = kwargs.get('overrideTime')
-    #
-    #         import pdb;pdb.set_trace()
-    #
-    #     super(PunchTime, self).save(*args, **kwargs)
-
     def save(self, *args, **kwargs):
         if kwargs.get('overrideTime'):
             self.punch_time = kwargs.pop('overrideTime', False)

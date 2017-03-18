@@ -14,6 +14,10 @@ $(function() {
     orientation: 'bottom'
   });
 
+  $('#adminCheckoutTime').datetimepicker({format: 'yyyy-mm-dd hh:ii'});
+  jQuery("#adminCheckoutTime").on("change", function(){
+    jQuery(this).closest("[data-name='volunteerRow']").find("#adminCheckoutButton").css("display", "block");
+  })
   $('#myTabs a').click(function(e) {
     e.preventDefault();
     $(this).tab('show');
@@ -25,8 +29,7 @@ $(function() {
       volunteer_id: $('#userID').val(),
       punch_type: "IN",
       branch_id: $("#branchID").val(),
-      //task_id: $("#taskSelect").find("option:selected").text(),
-        task_id: $("#taskSelect").val(),
+      task_id: $("#taskSelect").val(),
       flags: 0,
       csrfmiddlewaretoken: window.CSRF_TOKEN
     }).done(function(data) {
@@ -56,7 +59,6 @@ $(function() {
       volunteer_id: $('#userID').val(),
       punch_type: "OUT",
       branch_id: $("#branchID").val(),
-      //task_name: $("#taskSelect").find("option:selected").text(),
       task_id: $("#taskSelect").val(),
       flags: 0,
       csrfmiddlewaretoken: window.CSRF_TOKEN
@@ -128,8 +130,12 @@ $(function() {
         });
     });
 
+    var volunteerID, adminCheckoutTime;
     $('#adminCheckoutButton').click(function(e) {
-        var volunteerID = $(this).closest("[data-name='volunteerRow']").find("#volunteerStaffId").text();
+        volunteerID = $(this).closest("[data-name='volunteerRow']").find("#volunteerStaffId").text();
+        adminCheckoutTime = $(this).closest("[data-name='volunteerRow']").find("#adminCheckoutTime").val();
+        //adminCheckoutTime field value cleanup
+        adminCheckoutTime = adminCheckoutTime.replace(" ", "T");
         console.log("clicked the admin checkout button");
         e.preventDefault();
         $.post("/api/punchtimes", {
@@ -150,7 +156,7 @@ $(function() {
                 branch_id: "1", //TODO: consider removing in checkout scenario
                 task_id: "1",   //TODO: consider removing in checkout scenario
                 isAdminCheckout: 1,
-                adminCheckoutTime: "2017-03-18T14:43",
+                adminCheckoutTime: adminCheckoutTime,
                 flags: 0,
                 csrfmiddlewaretoken: window.CSRF_TOKEN
             }).done(function(data){
