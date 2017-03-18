@@ -62,7 +62,6 @@ class PunchTime(models.Model):
 
     def save(self, *args, **kwargs):
         if kwargs.get('overrideTime'):
-            self.punch_type = "OUT"
             self.punch_time = kwargs.pop('overrideTime', False)
         super(PunchTime, self).save(*args, **kwargs)
 

@@ -137,14 +137,31 @@ $(function() {
             punch_type: "OUT",
             branch_id: "1", //TODO: consider removing in checkout scenario
             task_id: "1",   //TODO: consider removing in checkout scenario
-            isAdminCheckout: 1,
-            adminCheckoutTime: "2017-03-13T12:00",
+            /*isAdminCheckout: 1,
+            adminCheckoutTime: "2017-03-18T14:05",*/
             flags: 0,
             csrfmiddlewaretoken: window.CSRF_TOKEN
         }).done(function(data) {
             console.log('success');
-            //refresh the page
-            window.location = window.location;
+            //overwrite the last entry
+            $.post("/api/punchtimes", {
+                volunteer_id: volunteerID,
+                punch_type: "OUT",
+                branch_id: "1", //TODO: consider removing in checkout scenario
+                task_id: "1",   //TODO: consider removing in checkout scenario
+                isAdminCheckout: 1,
+                adminCheckoutTime: "2017-03-18T14:43",
+                flags: 0,
+                csrfmiddlewaretoken: window.CSRF_TOKEN
+            }).done(function(data){
+                console.log("overwrote the last entry");
+                //refresh the page
+                window.location = window.location;
+            }).fail(function(data){
+                console.log("Error in the second post. Error: " + JSON.stringify(data));
+            });
+            /*//refresh the page
+            window.location = window.location;*/
         }).fail(function(data){
            console.log("Error: " + JSON.stringify(data));
         });
