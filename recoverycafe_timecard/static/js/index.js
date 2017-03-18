@@ -131,19 +131,20 @@ $(function() {
     $('#adminCheckoutButton').click(function(e) {
         var volunteerID = $(this).closest("[data-name='volunteerRow']").find("#volunteerStaffId").text();
         console.log("clicked the admin checkout button");
-        console.log($(this).closest("tr").find)
         e.preventDefault();
         $.post("/api/punchtimes", {
             volunteer_id: volunteerID,
             punch_type: "OUT",
             branch_id: "1", //TODO: consider removing in checkout scenario
-            task_id: "0",   //TODO: consider removing in checkout scenario
+            task_id: "1",   //TODO: consider removing in checkout scenario
             isAdminCheckout: 1,
-            adminCheckoutTime: "12:00",
+            adminCheckoutTime: "2017-03-13T12:00",
             flags: 0,
             csrfmiddlewaretoken: window.CSRF_TOKEN
         }).done(function(data) {
             console.log('success');
+            //refresh the page
+            window.location = window.location;
         }).fail(function(data){
            console.log("Error: " + JSON.stringify(data));
         });
