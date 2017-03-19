@@ -14,10 +14,17 @@ $(function() {
     orientation: 'bottom'
   });
 
-  $('#adminCheckoutTime').datetimepicker({format: 'yyyy-mm-dd hh:ii'});
-  jQuery("#adminCheckoutTime").on("change", function(){
-    jQuery(this).closest("[data-name='volunteerRow']").find("#adminCheckoutButton").css("display", "block");
-  })
+  //find all adminCheckoutTime fields to enable the datetimepicker
+  $("[data-name='volunteerRow']").find('#adminCheckoutTime').datetimepicker({format: 'yyyy-mm-dd hh:ii'});
+  jQuery("#adminCheckoutTime").on("mouseout change", function(){
+    if(jQuery(this).val().length === 16 && jQuery(this).val() !== "1899-12-31 00:00"){
+        jQuery(this).closest("[data-name='volunteerRow']").find("#adminCheckoutTimeValidationMsg").css("display", "none");
+        jQuery(this).closest("[data-name='volunteerRow']").find("#adminCheckoutButton").css("display", "block");
+    }else {
+        jQuery(this).closest("[data-name='volunteerRow']").find("#adminCheckoutTimeValidationMsg").css("display", "block");
+        jQuery(this).closest("[data-name='volunteerRow']").find("#adminCheckoutButton").css("display", "none");
+    }
+  });
   $('#myTabs a').click(function(e) {
     e.preventDefault();
     $(this).tab('show');
@@ -136,6 +143,9 @@ $(function() {
         adminCheckoutTime = $(this).closest("[data-name='volunteerRow']").find("#adminCheckoutTime").val();
         //adminCheckoutTime field value cleanup
         adminCheckoutTime = adminCheckoutTime.replace(" ", "T");
+        if(!adminCheckoutTime){
+            return;
+        }
         console.log("clicked the admin checkout button");
         e.preventDefault();
         $.post("/api/punchtimes", {
