@@ -39,6 +39,7 @@ class PunchTimeViewSet(viewsets.ModelViewSet):
             branch_id = serializer.validated_data.get('branch_id')
             task_id = serializer.validated_data.get('task_id')
             punch_type = serializer.validated_data.get('punch_type')
+            punch_time = serializer.validated_data.get('punch_time')
             is_admin_checkout = serializer.validated_data.get('isAdminCheckout')
 
             last_punch = PunchTime.objects.filter(volunteer_id=volunteer_auto_id
@@ -75,6 +76,13 @@ class PunchTimeViewSet(viewsets.ModelViewSet):
                                     last_punch.punch_time.strftime('%c'))
                         }
                         return Response(content)
+                # it is impossible to log out before logging in
+                elif punch_type == 'OUT' and punch_time < last_punch.punch_time:
+                    content = {
+                        'status': 'ERROR',
+                        'msg': 'You cannot logout before logging in.'
+                    }
+                    return Response(content)
 
         # Making the request object mutable, in order to update the value for 'volunteer_id' before using the request
         request.data._mutable = True
