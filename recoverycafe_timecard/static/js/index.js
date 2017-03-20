@@ -16,7 +16,7 @@ $(function() {
 
   //find all adminCheckoutTime fields to enable the datetimepicker
   $("[data-name='volunteerRow']").find('#adminCheckoutTime').datetimepicker({format: 'yyyy-mm-dd hh:ii'});
-  jQuery("#adminCheckoutTime").on("mouseout change", function(){
+  jQuery("#adminCheckoutTime").on("change", function(){
     if(jQuery(this).val().length === 16 && jQuery(this).val() !== "1899-12-31 00:00"){
         jQuery(this).closest("[data-name='volunteerRow']").find("#adminCheckoutTimeValidationMsg").css("display", "none");
         jQuery(this).closest("[data-name='volunteerRow']").find("#adminCheckoutButton").css("display", "block");

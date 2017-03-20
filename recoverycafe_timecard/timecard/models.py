@@ -45,7 +45,7 @@ class PunchTime(models.Model):
                 ('OUT', 'Punch Out'),
             )
     )
-    punch_time = models.DateTimeField(auto_now_add=True, null=True)
+    punch_time = models.DateTimeField(auto_now_add=True)
     flags = models.IntegerField(blank=True, null=True)
     isAdminCheckout = models.NullBooleanField()
     adminCheckoutTime = models.DateTimeField(max_length=50, null=True)
