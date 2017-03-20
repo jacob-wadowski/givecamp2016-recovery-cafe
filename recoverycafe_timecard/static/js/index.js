@@ -170,6 +170,9 @@ $(function() {
                 flags: 0,
                 csrfmiddlewaretoken: window.CSRF_TOKEN
             }).done(function(data){
+                if(data.status === "ERROR" || data.status === "NO USER"){
+                    alert(data.msg);
+                }
                 console.log("overwrote the last entry");
                 //refresh the page
                 window.location = window.location;

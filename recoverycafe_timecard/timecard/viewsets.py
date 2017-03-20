@@ -41,12 +41,21 @@ class PunchTimeViewSet(viewsets.ModelViewSet):
             punch_type = serializer.validated_data.get('punch_type')
             is_admin_checkout = serializer.validated_data.get('isAdminCheckout')
 
-            last_punch = PunchTime.objects.filter(volunteer_id=volunteer_auto_id
-                    ).order_by('-punch_time').first()
+            last_punch = PunchTime.objects.filter(volunteer_id=volunteer_auto_id).order_by('-punch_time').first()
 
             if is_admin_checkout:
                 adminCheckoutTime = serializer.validated_data.get('adminCheckoutTime')
-                last_punch.save(overrideTime=adminCheckoutTime)
+                # admin checkout use case; do not allow a checkout time earlier than the check-in time
+                if punch_type == 'OUT' and adminCheckoutTime < last_punch.punch_time:
+                    # delete the previous record since this catch was made after the volunteer was already checked out
+                    PunchTime.objects.filter(volunteer_id=volunteer_auto_id, punch_type="OUT").order_by('-punch_time').first().delete()
+                    content = {
+                        'status': 'ERROR',
+                        'msg': 'You cannot logout before logging in.'
+                    }
+                    return Response(content)
+                else:
+                    last_punch.save(overrideTime=adminCheckoutTime)
 
             # Handle never ever logged in, and trying to log out
             if last_punch is None:
