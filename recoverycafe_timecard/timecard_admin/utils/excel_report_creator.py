@@ -16,16 +16,14 @@ def excel_report_creator(data):
     # In[1]:
     raw_df = pd.DataFrame(data=data, columns=['id','staff_id', 'first_name', 'last_name','branch_name','task_name','punch_time_in','punch_time_out','session_time_hours'])
 
-
     # In[2]:
     # In[3]:
 
     # clean up data types
     df = raw_df.copy()
 
-
-    df.punch_time_in = pd.to_datetime(df.punch_time_in)
-    df.punch_time_out = pd.to_datetime(df.punch_time_out)
+    df['punch_time_in'] = pd.to_datetime(df.punch_time_in).dt.tz_localize('UTC').dt.tz_convert('US/Pacific').dt.tz_localize(None)
+    df['punch_time_out'] = pd.to_datetime(df.punch_time_out).dt.tz_localize('UTC').dt.tz_convert('US/Pacific').dt.tz_localize(None)
 
     # In[4]:
     # create new columns
@@ -149,7 +147,7 @@ def excel_report_creator(data):
     sheet = '-- raw data --'
 
     # write table
-    raw_df.ix[:,1:].to_excel(writer, sheet_name=sheet)
+    df.ix[:, 1:].to_excel(writer, sheet_name=sheet)
 
     # set width for columns
     worksheet = writer.sheets[sheet]
