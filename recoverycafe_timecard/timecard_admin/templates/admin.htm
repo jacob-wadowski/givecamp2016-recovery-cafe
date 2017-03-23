@@ -47,8 +47,8 @@
                                 <td id="volunteerClockedInStatus">{{volunteer.punch_type_latest}}</td>
                                 <td id="volunteerClockInTime">{{volunteer.punch_time_latest}}</td>
                                 <td id="volunteerAdminCheckoutTime">
-                                    <input id="adminCheckoutTime" placeholder="click here to enter time" style="float:left; padding:5px; margin-right:3px"></input>
-                                    <button type="button" class="btn btn-danger btn-md" style="display:none" id="adminCheckoutButton">Check Out</button>
+                                    <input id="adminCheckoutTime" data-name="adminCheckoutTime" placeholder="click here to enter time" style="float:left; padding:5px; margin-right:3px"></input>
+                                    <button type="button" class="btn btn-danger btn-md" style="display:none" data-name="adminCheckoutButton" id="adminCheckoutButton">Check Out</button>
                                     <p id="adminCheckoutTimeValidationMsg" style="display:none; color:red; font-style:italic">Please enter a valid checkout time</p>
                                 </td>
                             </tr>
