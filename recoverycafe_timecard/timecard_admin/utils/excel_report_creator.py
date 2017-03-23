@@ -4,7 +4,7 @@ import pandas as pd
 import xlsxwriter
 from xlsxwriter.utility import xl_rowcol_to_cell
 
-import datetime, sys
+import datetime, sys, pytz
 
 
 def excel_report_creator(data):
@@ -16,13 +16,13 @@ def excel_report_creator(data):
     # In[1]:
     raw_df = pd.DataFrame(data=data, columns=['id','staff_id', 'first_name', 'last_name','branch_name','task_name','punch_time_in','punch_time_out','session_time_hours'])
 
-
     # In[2]:
     # In[3]:
 
     # clean up data types
     df = raw_df.copy()
 
+    tz = pytz.timezone('US/Eastern')
 
     df.punch_time_in = pd.to_datetime(df.punch_time_in)
     df.punch_time_out = pd.to_datetime(df.punch_time_out)

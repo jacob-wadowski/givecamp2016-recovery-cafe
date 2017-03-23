@@ -35,7 +35,7 @@ $(function() {
     $.post("/api/punchtimes", {
       volunteer_id: $('#userID').val(),
       punch_type: "IN",
-      branch_id: $("#branchID").val(),
+      branch_id: $("#branchSelect").val(),
       task_id: $("#taskSelect").val(),
       flags: 0,
       csrfmiddlewaretoken: window.CSRF_TOKEN
@@ -65,7 +65,7 @@ $(function() {
     $.post("/api/punchtimes", {
       volunteer_id: $('#userID').val(),
       punch_type: "OUT",
-      branch_id: $("#branchID").val(),
+      branch_id: $("#branchSelect").val(),
       task_id: $("#taskSelect").val(),
       flags: 0,
       csrfmiddlewaretoken: window.CSRF_TOKEN
