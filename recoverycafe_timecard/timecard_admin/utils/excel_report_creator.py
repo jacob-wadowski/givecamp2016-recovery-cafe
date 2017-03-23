@@ -14,27 +14,26 @@ def excel_report_creator(data):
     # ## test excel report export creator
 
     # In[1]:
-    raw_df = pd.DataFrame(data=data, columns=['id','staff_id', 'first_name', 'last_name','branch_name','task_name','punch_time_in','punch_time_out','session_time_hours'])
+    raw_df = pd.DataFrame(data=data, columns=['id','staff_id','first_name','name','branch_name','task_name','punch_time_in','punch_time_out','session_time_hours'])
 
     # In[2]:
     # In[3]:
 
     # clean up data types
     df = raw_df.copy()
+    #remove first name from dataframe
+    del df['first_name']
 
-    tz = pytz.timezone('US/Eastern')
-
-    df.punch_time_in = pd.to_datetime(df.punch_time_in)
-    df.punch_time_out = pd.to_datetime(df.punch_time_out)
+    df['punch_time_in'] = pd.to_datetime(df.punch_time_in).dt.tz_localize('UTC').dt.tz_convert('US/Pacific').dt.tz_localize(None)
+    df['punch_time_out'] = pd.to_datetime(df.punch_time_out).dt.tz_localize('UTC').dt.tz_convert('US/Pacific').dt.tz_localize(None)
 
     # In[4]:
     # create new columns
-    df['volunteer_name'] = df.last_name
     df['month'] = df['punch_time_in'].dt.month
     df['year'] = df['punch_time_in'].dt.year
 
     # In[5]:
-    grouped = df.groupby(['year','month','volunteer_name'])
+    grouped = df.groupby(['year','month','name'])
     volunteer = grouped.agg({'punch_time_in' : 'count', 'session_time_hours' : 'sum'})
     volunteer.columns = ['Volunteer Sessions', 'Total Hours']
 
@@ -58,7 +57,7 @@ def excel_report_creator(data):
     task_month = task_month.unstack(['year','month'])
 
     # In[10]:
-    grouped = df.groupby(['year','month','volunteer_name', 'task_name'])
+    grouped = df.groupby(['year','month','name', 'task_name'])
     volunteer_task = grouped.agg({'punch_time_in' : 'count', 'session_time_hours' : 'sum'})
     volunteer_task.columns = ['Volunteer Sessions', 'Total Hours']
 
@@ -149,7 +148,7 @@ def excel_report_creator(data):
     sheet = '-- raw data --'
 
     # write table
-    raw_df.ix[:,1:].to_excel(writer, sheet_name=sheet)
+    df.ix[:, 1:].to_excel(writer, sheet_name=sheet)
 
     # set width for columns
     worksheet = writer.sheets[sheet]
